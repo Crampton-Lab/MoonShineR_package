@@ -1,38 +1,50 @@
-#' A function to predict ground illuminance
+#' Predict moonlight, sunlight, twilight ground illuminance
 #'
-#' * This function predicts moonlight, sunlight, and/or twilight ground illumination in lux for any defined geographical location and time period. It creates a data.frame output and automatically plot to the console. Automatic export of the table (.csv) and plot (.pdf) is optional.
-#' * To learn more about MoonShine, see instruction manual: <https://lokpoon.github.io/moonshine_manual/overview.html>
-#' @param latitude `numeric`. Latitude in decimal degrees (e.g., -4.21528).
-#' @param longitude `numeric`. Longitude in decimal degrees (e.g., -69.94056).
-#' @param site_elev `numeric`. Site elevation in meters (e.g., 0 = sea level). Default = 0. Elevation correction only applies to moonlight but not sunlight and twilight. Site elevation of a coordinate location can be obtained from <https://www.dcode.fr/earth-elevation>.
-#' @param time_zone `character`. Time zone for the location set (e.g., “EST”). Remember to change time_zone to corrospond it to the location set. For a list of time zone names, enter OlsonNames(tzdir = NULL) in R console. Use a time zone without DST (e.g., use "EST" instead of "America/New_York").
-#' @param date_start `character`. Starting date of the simulation ("YYYY-MM-DD").
-#' @param time_start `character`. Starting time of the simulation ("hh:mm:ss"). Default = "00:00:00".
+#' * predict_lux() predicts moonlight, sunlight, and/or twilight ground illumination in lux for any defined geographical location and time period. It creates a data.frame output and automatically plot to the console. Automatic export of the table (.csv) and plot (.pdf) is optional.
+#' * To learn more about MoonShineR, see instruction manual: <https://lokpoon.github.io/moonshine_manual/overview.html>
+#' @param latitude `numeric`. Latitude in decimal degrees (e.g., `-4.21528`).
+#' @param longitude `numeric`. Longitude in decimal degrees (e.g., `-69.94056`).
+#' @param site_elev `numeric`. Site elevation in meters (e.g., `0` is sea level). Default is `0`. Elevation correction only applies to moonlight but not sunlight and twilight. Site elevation of a coordinate location can be obtained from <https://www.dcode.fr/earth-elevation>.
+#' @param time_zone `character`. Time zone for the location set (e.g., `“EST”`). Remember to change time_zone to corrospond it to the location set. For a list of time zone names, enter `OlsonNames(tzdir = NULL)` in R console. Use a time zone without DST to avoid confusion (e.g., use `"EST"` instead of `"America/New_York"`).
+#' @param date_start `character`. Starting date of the simulation (`"YYYY-MM-DD"`).
+#' @param time_start `character`. Starting time of the simulation (`"hh:mm:ss"`). Default is `"00:00:00"`.
 #' @param duration_day `numeric`. Duration of the simulation in days.
-#' @param time_interval_minutes `numeric`.The temporal resolution of the simulation in minutes. E.g., 5 = calculates the illuminance every 5 minutes. Using small time interval requires longer computation time.
-#' @param darksky_value `numeric`. A baseline illumination added to the model to represent other constant nocturnal light sources (e.g., starlight and airglow). Default = 0.0008. Change it to zero if a completely dark sky is preferred.
-#' @param illuminance_type_plot `character`. Choose one type of illuminance to plot. See options in the section below. Default = "moon_final_lux_nighttime".
-#' @param output_directory `character`. Directory to save the output table (.csv) and plot (.pdf). NULL if saving is turned OFF (i.e., save_table = FALSE and save_plot = FALSE).
-#' @param save_table `logical`. TRUE to export output .csv table to the output_directory. FALSE to disable. Default = FALSE.
-#' @param save_plot `logical`. TRUE to export output .pdf plot to the output_directory. FALSE to disable. Default = FALSE.
-#' @param plot_width `numeric`. The exported .pdf plot width in inch. Default = 11.
-#' @param plot_height `numeric`. The exported .pdf plot height in inch. Default = 8.5.
-#' @param plot_y_max `character` "AUTO", or `numeric`. Let the plot y-axis scale automatically or manually set a y-axis upper limit. Affects both the plot in the plot window and the exported .pdf. Default = "AUTO".
-#' @param plot_dayttime_gray_mask 'logical`. TRUE to mask daytime plot line in gray. Affects both the plot in the plot window and the exported .pdf. FALSE to disable (plot line always black).
+#' @param time_interval_minutes `numeric`.The temporal resolution of the simulation in minutes. E.g., `5` calculates the illuminance every 5 minutes. Using small time interval requires longer computation time. Default is `5`.
+#' @param darksky_value `numeric`. A baseline illuminance (in lux) added to the model to represent other constant nocturnal light sources (e.g., starlight and airglow). Default is `0.0008`. Change it to zero if a completely dark sky is preferred.
+#' @param illuminance_type_plot `character`. Choose one type of illuminance to plot. See options in the section below. Default is `"moon_final_lux_nighttime"`.
+#' @param output_directory `character`. Directory to save the output table (.csv) and plot (.pdf). Ignore output_directory if the two export options are turned OFF (i.e., `export_table = FALSE` and `export_plot = FALSE`).
+#' @param export_table `logical`. `TRUE` to export output .csv table to the output_directory. `FALSE` to disable. Default is `FALSE`.
+#' @param export_plot `logical`. `TRUE` to export output .pdf plot to the output_directory. `FALSE` to disable. Default is `FALSE`.
+#' @param plot_width `numeric`. The exported .pdf plot width in inch. Default is `11`.
+#' @param plot_height `numeric`. The exported .pdf plot height in inch. Default is `8.5`.
+#' @param plot_y_max `character` `"AUTO"`, or `numeric`. Let the plot y-axis scale automatically or manually set a y-axis upper limit. Affects both the plot in the plot window and the exported .pdf. Default is `"AUTO"`.
+#' @param plot_dayttime_gray_mask `logical`. `TRUE` to mask daytime plot line in gray. Affects both the plot in the plot window and the exported .pdf. `FALSE` to disable (plot line always black). Default is `TRUE`.
+#' @param plot_twilight `character`. Set the twilight period to plot as a gray area. `"astro"` is astronomical twilight (longest). `"nautic"` is nautical twilight (intermediate). `"civil"` is civil twilight (shortest). `"none"` to disable plotting of twilight period. Default is `"astro"`.
 #' @details
-#' # illuminance_type_plot options:
-#' Note: these terms corresponding to the columns headers in the output table:
+#' # `illuminance_type_plot` options:
 #' * **"moon_final_lux"** plots only the illuminance of moonlight (plus the darksky_value) during both day and night.
-#' * **"moon_final_lux_nighttime"** plots only the illuminance of moonlight at night (no value during daytime, when sun altitude > 0 degrees)
-#' * **"moonlight_twilight_nighttime"** plots the illuminance of moonlight plus twilight (no value during daytime, when sun altitude > 0 degrees)
-#' * **"twilight"** plots only the illuminance of twilight (defined as the light when sun altitude < 0 degrees).
-#' * **"sunlight"** plots only the illuminance of sunlight (defined as the light when sun altitude > 0 degrees).
-#' * **"sunlight_twilight"** plots only the sum of sunlight and twilight
+#' * **"moon_final_lux_nighttime"** plots only the illuminance of moonlight at night (no value during daytime, when `sun_altitude` > 0 degrees)
+#' * **"moonlight_twilight_nighttime"** plots the illuminance of moonlight plus twilight (no value during daytime, when `sun_altitude` > 0 degrees)
+#' * **"twilight"** plots only the illuminance of twilight (defined as the light when `sun_altitude` < 0 degrees).
+#' * **"sunlight"** plots only the illuminance of sunlight (defined as the light when `sun_altitude` > 0 degrees).
+#' * **"sunlight_twilight"** plots only the sum of sunlight and twilight.
 #' * **"total_illuminance_all"** plots all illuminance together, calculated as the sum of moonlight, twilight, and sunlight.
+#' Note: The above terms corresponding to the columns headers in the output table.
 #' @details
-#' # Columns in the output data.frame/.csv table
-#' * **datetime** `POSIXct`. Datetime in "YYYY-MM-DD hh:mm:ss".
-#' * **phase_angle** `numeric` phase angle of the moon in degree angle.
+#' # Columns found in the output data.frame/.csv table:
+#' * A series of astronomical and illuminance values are reported for every time stamp. In explanation,
+#' * **datetime** `POSIXct`. Datetime in `"YYYY-MM-DD hh:mm:ss"`.
+#' * **phase_angle** `numeric`. Phase angle of the moon in degree angle.
+#' * **fraction** `numeric`. Illuminated fraction of the moon.
+#' * **Z_moon** `numeric`. Zenith distance of the moon in degree angle (i.e., the angle of separation from directly overhead). > 90 means the moon is below the horizon.
+#' * **distance** `numeric`. The moon-Earth distance in km.
+#' * **sun_altitude** `numeric`. The sun altitude (relative to the horizon) in degree angle. Negative value means the sun is below the horizon.
+#' * See above **"illuminance_type_plot` options** for explanation of the rest of the columns that report different type of illuminance.
+#' # Plotting details:
+#' * The magnitude of moonlight and sunlight illuminance differs immensely. So depending on the `illuminance_type_plot` selected, the user might want to manually adjust the plot_y_max.
+#' * `plot_dayttime_gray_mask` is `TRUE` by default to mask daytime illuminance in gray. This is particularly useful when plotting `"moon_final_lux"` to make it clear that moonlight during daytime should be ignored.
+#' * Nighttime is always shaded in dark gray.
+#' * Twilight period is shaded in light gray. The period of twilight can be adjusted with `plot_twilight`.
 #' @keywords moonlight
 #' @import magrittr
 #' @import dplyr
@@ -41,28 +53,16 @@
 #' moonlight_output <- predict_lux(latitude = -4.21528, longitude = -69.94056, site_elev = 0, time_zone = "EST",
 #'                     date_start = "2023-02-27", time_start = "18:00:00", duration_day = 14, time_interval_minutes = 5,
 #'                     darksky_value = 0.0008, illuminance_type_plot = "moon_final_lux_nighttime",
-#'                     output_directory = NULL, save_table = FALSE, save_plot = FALSE,
-#'                     plot_width = 11, plot_height = 8.5, plot_y_max = "AUTO",  plot_dayttime_gray_mask = TRUE)
+#'                     output_directory = NULL, export_table = FALSE, export_plot = FALSE,
+#'                     plot_width = 11, plot_height = 8.5, plot_y_max = "AUTO",  plot_dayttime_gray_mask = TRUE, plot_twilight = "astro")
 
 
-# $ datetime                    : POSIXct, format: "2023-02-27 18:00:00" "2023-02-27 18:05:00" "2023-02-27 18:10:00" "2023-02-27 18:15:00" ...
-# $ phase_angle                 : num  83.1 83 83 83 82.9 ...
-# $ fraction                    : num  0.56 0.561 0.561 0.561 0.562 ...
-# $ Z_moon                      : num  29.7 29.7 29.7 29.7 29.8 ...
-# $ distance                    : num  396890 396904 396918 396931 396945 ...
-# $ sun_altitude                : num  -1.13 -2.36 -3.59 -4.83 -6.06 ...
-# $ moon_final_lux              : num  0.0252 0.0253 0.0253 0.0253 0.0253 ...
-# $ moon_final_lux_nighttime    : num  0.0252 0.0253 0.0253 0.0253 0.0253 ...
-# $ twilight                    : num  369.61 139.82 44.87 12.59 3.19 ...
-# $ sunlight                    : num  0 0 0 0 0 0 0 0 0 0 ...
-# $ total_illuminance_all       : num  369.64 139.84 44.89 12.62 3.21 ...
-# $ sunlight_twilight           : num  369.61 139.82 44.87 12.59 3.19 ...
-# $ moonlight_twilight_nighttime: num  369.64 139.84 44.89 12.62 3.21 ...
+
 
 predict_lux <- function(latitude = NULL, longitude = NULL, site_elev = 0, time_zone = NULL, date_start = NULL, time_start = "00:00:00",
                         duration_day = NULL, time_interval_minutes = 5, darksky_value = 0.0008, illuminance_type_plot = "moon_final_lux_nighttime",
-                        output_directory = NULL, save_table = FALSE, save_plot = FALSE,
-                        plot_width = 11, plot_height = 8.5, plot_y_max = "AUTO",  plot_dayttime_gray_mask = TRUE) {
+                        output_directory = NULL, export_table = FALSE, export_plot = FALSE,
+                        plot_width = 11, plot_height = 8.5, plot_y_max = "AUTO",  plot_dayttime_gray_mask = TRUE, plot_twilight = "astro") {
 
   #---------------------------START OF ILLUMINATION COMPUTATION-------------------
 
@@ -171,7 +171,7 @@ predict_lux <- function(latitude = NULL, longitude = NULL, site_elev = 0, time_z
   #---------------------------END OF ILLUMINATION COMPUTATION--------------------
 
 # Save moon table csv file
-  if (save_table) {
+  if (export_table) {
     utils::write.csv(moon_value_table, paste0(output_directory, "/", "lux_calculator_output.csv"), row.names = TRUE)
   }
 
@@ -191,7 +191,13 @@ predict_lux <- function(latitude = NULL, longitude = NULL, site_elev = 0, time_z
   night_time <- dplyr::filter(moon_value_table, sun_altitude < 0) %>% dplyr::select(datetime)
   night_time <- lubridate::as_datetime(night_time$datetime, tz = time_zone)
 
-  after_twilight_time <- dplyr::filter(moon_value_table, sun_altitude < (-18)) %>% dplyr::select(datetime)
+  # Define twilight period
+  if(plot_twilight == "astro"){twilight_angle <- -18}
+  if(plot_twilight == "nautic"){twilight_angle <- -12}
+  if(plot_twilight == "civil"){twilight_angle <- -6}
+  if(plot_twilight == "none"){twilight_angle <- 0}
+
+  after_twilight_time <- dplyr::filter(moon_value_table, sun_altitude < (twilight_angle)) %>% dplyr::select(datetime)
   after_twilight_time <- lubridate::as_datetime(after_twilight_time$datetime, tz =  time_zone)
 
   day_time <- dplyr::filter(moon_value_table, sun_altitude > 0) %>% dplyr::select(datetime)
@@ -232,7 +238,7 @@ predict_lux <- function(latitude = NULL, longitude = NULL, site_elev = 0, time_z
                                       ymin = 0, ymax = Inf), fill = "white", alpha = 0.85, na.rm = TRUE)}
 
 # Save plot:
-    if (save_plot) {
+    if (export_plot) {
       ggplot2::ggsave(plot = plot_output, paste0(output_directory, "/", "lux_calculator_output_plot.pdf"), width = plot_width, height = plot_height)
     }
 
