@@ -65,7 +65,7 @@ predict_lux(
 \description{
 \itemize{
 \item predict_lux() predicts moonlight, sunlight, and/or twilight ground illumination in lux for any defined geographical location and time period. It creates a data.frame output and automatically plot to the console. Automatic export of the table (.csv) and plot (.pdf) is optional.
-\item The presences of lunar eclipse during the simulated period is also reported. The illuminance reduction during lunar eclipse is not modeled.
+\item User is informed about the presence of lunar eclipse during the simulated period as a console messeage. The illuminance reduction during lunar eclipse is not modeled.
 \item To learn more about MoonShineR, see instruction manual: \url{https://lokpoon.github.io/moonshine_manual/overview.html}
 }
 }
@@ -104,6 +104,13 @@ Note: The above terms corresponding to the columns headers in the output table.
 }
 }
 
+\section{Attribution}{
+\itemize{
+\item Astronomical values used in calculating ground illuminance are provided by the R package suncalc (Thieurmel & Elmarhraoui, 2022).
+\item Atmospheric pressure at elevation is provided by the R package RPMODEL (Stocker et al., 2020).
+}
+}
+
 \examples{
 # Predict the nighttime moonlight illuminance in Leticia, Colombia,
 # for 14 days starting on 2023-02-27 at 6pm.
@@ -114,5 +121,19 @@ moonlight_output <- predict_lux(latitude = -4.21528, longitude = -69.94056, site
                     illuminance_type_plot = "moon_final_lux_nighttime", output_directory = NULL,
                     export_table = FALSE, export_plot = FALSE, plot_width = 11, plot_height = 8.5,
                     plot_y_max = "AUTO",  plot_dayttime_gray_mask = TRUE, plot_twilight = "astro")
+}
+\references{
+\itemize{
+\item Allen, C. W. (1976). Astrophysical quantities. Athelone Press.
+\item Austin, R. H., Phillips, B. F., & Webb, D. J. (1976). A method for calculating moonlight illuminance at the earth’s surface. The Journal of Applied Ecology, 13(3), 741.
+\item Buratti, B. J., Hillier, J. K., & Wang, M. (1996). The lunar opposition surge: Observations by clementine. Icarus, 124(2), 490–499.
+\item Hänel, A., Posch, T., Ribas, S. J., Aubé, M., Duriscoe, D., Jechow, A., Kollath, Z., Lolkema, D. E., Moore, C., Schmidt, N., Spoelstra, H., Wuchterl, G., & Kyba, C. C. M. (2018). Measuring night sky brightness: Methods and challenges. Journal of Quantitative Spectroscopy and Radiative Transfer, 205, 278–290.
+\item Krisciunas, K., & Schaefer, B. E. (1991). A model of the brightness of moonlight. Publications of the Astronomical Society of the Pacific, 103, 1033.
+\item Laue, E. G. (1970). The measurement of solar spectral irradiance at different terrestrial elevations. Solar Energy, 13(1), 43–57.
+\item Schaefer, B. E. (1990). Telescopic limiting magnitudes. Publications of the Astronomical Society of the Pacific, 102, 212.
+\item Seidelmann, P. K., United States Naval Observatory, & Great Britain (Eds.). (1992). Explanatory supplement to the Astronomical almanac (Rev. ed.). University Science Books.
+\item Stocker, B. D., Wang, H., Smith, N. G., Harrison, S. P., Keenan, T. F., Sandoval, D., Davis, T., & Prentice, I. C. (2020). P-model v1.0: An optimality-based light use efficiency model for simulating ecosystem gross primary production. Geoscientific Model Development, 13(3), 1545–1581.
+\item Thieurmel, B., & Elmarhraoui, A. (2022). suncalc: Compute sun position, sunlight phases, moon position and lunar phase. R package version 0.5.1. \url{https://CRAN.R-project.org/package=suncalc}
+}
 }
 \keyword{moonlight}
