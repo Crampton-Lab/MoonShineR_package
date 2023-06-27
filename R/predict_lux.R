@@ -263,7 +263,6 @@ predict_lux <- function(latitude = NULL, longitude = NULL, site_elev = 0, time_z
 
   print(plot_output)
 
-  print("The calculation is completed. The .csv table and .pdf plot (if required) are saved to the specified output_directory.")
 
   #---------------------------Lunar eclipse warning---------------------------
 
@@ -271,11 +270,11 @@ predict_lux <- function(latitude = NULL, longitude = NULL, site_elev = 0, time_z
   # However, MoonShineR does not simulate the reduction in moon ground illuminance associated with the eclipse.
 
   if (any(abs(moon_value_table$phase_angle) < 1.5 & moon_value_table$sun_altitude < 0)) { # eclipse defined as a moon with phase angle < 1.5 during nighttime
-    print("ECLIPSE IN SIMULATION!!!")
+    print("The calculation is completed. ECLIPSE IN SIMULATION!!!")
     eclipse_list <- (abs(moon_value_table$phase_angle) < 1.5 & moon_value_table$sun_altitude < 0)
     moon_value_table[which(eclipse_list == TRUE),]
   } else {
-    print("no eclipse in simulation")
+    print("The calculation is completed. No eclipse in simulation")
   }
 
   # Return table
