@@ -2,7 +2,7 @@
 % Please edit documentation in R/predict_lux.R
 \name{predict_lux}
 \alias{predict_lux}
-\title{Predict moonlight/sunlight/twilight ground illuminance}
+\title{Predict moonlight, sunlight, twilight ground illuminance}
 \usage{
 predict_lux(
   latitude = NULL,
@@ -30,17 +30,17 @@ predict_lux(
 
 \item{longitude}{\code{numeric}. Longitude in decimal degrees (e.g., \code{-69.94056}).}
 
-\item{site_elev}{\code{numeric}. Site elevation in meters (e.g., \code{0} is sea level). Default = \code{0}. Elevation correction only applies to moonlight but not sunlight and twilight. Site elevation of a coordinate location can be obtained from \url{https://www.dcode.fr/earth-elevation}.}
+\item{site_elev}{\code{numeric}. Site elevation in meters (e.g., \code{0} is sea level). Default is \code{0}. Elevation correction only applies to moonlight but not sunlight and twilight. Site elevation of a coordinate location can be obtained from \url{https://www.dcode.fr/earth-elevation}.}
 
 \item{time_zone}{\code{character}. Time zone for the location set (e.g., \verb{“EST”}). Remember to change time_zone to corrospond it to the location set. For a list of time zone names, enter \code{OlsonNames(tzdir = NULL)} in R console. Use a time zone without DST to avoid confusion (e.g., use \code{"EST"} instead of \code{"America/New_York"}).}
 
 \item{date_start}{\code{character}. Starting date of the simulation (\code{"YYYY-MM-DD"}).}
 
-\item{time_start}{\code{character}. Starting time of the simulation (\code{"hh:mm:ss"}). Default = \code{"00:00:00"}.}
+\item{time_start}{\code{character}. Starting time of the simulation (\code{"hh:mm:ss"}). Default is \code{"00:00:00"}.}
 
 \item{duration_day}{\code{numeric}. Duration of the simulation in days.}
 
-\item{time_interval_minutes}{\code{numeric}.The temporal resolution of the simulation in minutes. E.g., \code{5} calculates the illuminance every 5 minutes. Using small time interval requires longer computation time. Default = \code{5}.}
+\item{time_interval_minutes}{\code{numeric}.The temporal resolution of the simulation in minutes. E.g., \code{5} calculates the illuminance every 5 minutes. Using small time interval requires longer computation time. Default is \code{5}.}
 
 \item{darksky_value}{\code{numeric}. A baseline illuminance (in lux) added to the model to represent other constant nocturnal light sources (e.g., starlight and airglow). Default is \code{0.0008}. Change it to zero if a completely dark sky is preferred.}
 
@@ -65,6 +65,7 @@ predict_lux(
 \description{
 \itemize{
 \item predict_lux() predicts moonlight, sunlight, and/or twilight ground illumination in lux for any defined geographical location and time period. It creates a data.frame output and automatically plot to the console. Automatic export of the table (.csv) and plot (.pdf) is optional.
+\item The presences of lunar eclipse during the simulated period is also reported. The illuminance reduction during lunar eclipse is not modeled.
 \item To learn more about MoonShineR, see instruction manual: \url{https://lokpoon.github.io/moonshine_manual/overview.html}
 }
 }
@@ -96,7 +97,7 @@ Note: The above terms corresponding to the columns headers in the output table.
 
 \section{Plotting details:}{
 \itemize{
-\item The magnitude of moonlight and sunlight illuminance differs immensely. So depending on the \code{illuminance_type_plot} options selected, the user might want to manually adjust the plot_y_max.
+\item The magnitude of moonlight and sunlight illuminance differs immensely. So depending on the \code{illuminance_type_plot} selected, the user might want to manually adjust the plot_y_max.
 \item \code{plot_dayttime_gray_mask} is \code{TRUE} by default to mask daytime illuminance in gray. This is particularly useful when plotting \code{"moon_final_lux"} to make it clear that moonlight during daytime should be ignored.
 \item Nighttime is always shaded in dark gray.
 \item Twilight period is shaded in light gray. The period of twilight can be adjusted with \code{plot_twilight}.
@@ -104,10 +105,14 @@ Note: The above terms corresponding to the columns headers in the output table.
 }
 
 \examples{
-moonlight_output <- predict_lux(latitude = -4.21528, longitude = -69.94056, site_elev = 0, time_zone = "EST",
-                    date_start = "2023-02-27", time_start = "18:00:00", duration_day = 14, time_interval_minutes = 5,
-                    darksky_value = 0.0008, illuminance_type_plot = "moon_final_lux_nighttime",
-                    output_directory = NULL, export_table = FALSE, export_plot = FALSE,
-                    plot_width = 11, plot_height = 8.5, plot_y_max = "AUTO",  plot_dayttime_gray_mask = TRUE, plot_twilight = "astro")
+# Predict the nighttime moonlight illuminance in Leticia, Colombia,
+# for 14 days starting on 2023-02-27 at 6pm.
+
+moonlight_output <- predict_lux(latitude = -4.21528, longitude = -69.94056, site_elev = 0,
+                    time_zone = "EST", date_start = "2023-02-27", time_start = "18:00:00",
+                    duration_day = 14, time_interval_minutes = 5, darksky_value = 0.0008,
+                    illuminance_type_plot = "moon_final_lux_nighttime", output_directory = NULL,
+                    export_table = FALSE, export_plot = FALSE, plot_width = 11, plot_height = 8.5,
+                    plot_y_max = "AUTO",  plot_dayttime_gray_mask = TRUE, plot_twilight = "astro")
 }
 \keyword{moonlight}

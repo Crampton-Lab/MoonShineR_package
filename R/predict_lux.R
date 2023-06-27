@@ -1,6 +1,7 @@
 #' Predict moonlight, sunlight, twilight ground illuminance
 #'
 #' * predict_lux() predicts moonlight, sunlight, and/or twilight ground illumination in lux for any defined geographical location and time period. It creates a data.frame output and automatically plot to the console. Automatic export of the table (.csv) and plot (.pdf) is optional.
+#' * The presences of lunar eclipse during the simulated period is also reported. The illuminance reduction during lunar eclipse is not modeled.
 #' * To learn more about MoonShineR, see instruction manual: <https://lokpoon.github.io/moonshine_manual/overview.html>
 #' @param latitude `numeric`. Latitude in decimal degrees (e.g., `-4.21528`).
 #' @param longitude `numeric`. Longitude in decimal degrees (e.g., `-69.94056`).
@@ -49,12 +50,17 @@
 #' @import magrittr
 #' @import dplyr
 #' @export
+#' @references
 #' @examples
-#' moonlight_output <- predict_lux(latitude = -4.21528, longitude = -69.94056, site_elev = 0, time_zone = "EST",
-#'                     date_start = "2023-02-27", time_start = "18:00:00", duration_day = 14, time_interval_minutes = 5,
-#'                     darksky_value = 0.0008, illuminance_type_plot = "moon_final_lux_nighttime",
-#'                     output_directory = NULL, export_table = FALSE, export_plot = FALSE,
-#'                     plot_width = 11, plot_height = 8.5, plot_y_max = "AUTO",  plot_dayttime_gray_mask = TRUE, plot_twilight = "astro")
+#' # Predict the nighttime moonlight illuminance in Leticia, Colombia,
+#' # for 14 days starting on 2023-02-27 at 6pm.
+#'
+#' moonlight_output <- predict_lux(latitude = -4.21528, longitude = -69.94056, site_elev = 0,
+#'                     time_zone = "EST", date_start = "2023-02-27", time_start = "18:00:00",
+#'                     duration_day = 14, time_interval_minutes = 5, darksky_value = 0.0008,
+#'                     illuminance_type_plot = "moon_final_lux_nighttime", output_directory = NULL,
+#'                     export_table = FALSE, export_plot = FALSE, plot_width = 11, plot_height = 8.5,
+#'                     plot_y_max = "AUTO",  plot_dayttime_gray_mask = TRUE, plot_twilight = "astro")
 
 
 
