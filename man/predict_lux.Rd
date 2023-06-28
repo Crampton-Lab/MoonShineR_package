@@ -66,6 +66,7 @@ predict_lux(
 \itemize{
 \item predict_lux() predicts moonlight, sunlight, and/or twilight ground illumination in lux for any defined geographical location and time period. It creates a data.frame output and automatically plot to the console. Automatic export of the table (.csv) and plot (.pdf) is optional.
 \item User is informed about the presence of lunar eclipse during the simulated period as a console messeage. The illuminance reduction during lunar eclipse is not modeled.
+\item To create a moonlight or sunlight LED schedule for light re-creation using MoonShineP, user need to download the R script version of the MoonShineR: Moonlight scheduler or MoonShineR: Sunlight/twilight scheduler from GitHub repository: \url{https://github.com/Crampton-Lab/MoonShine}
 \item To learn more about MoonShineR, see instruction manual: \url{https://lokpoon.github.io/moonshine_manual/overview.html}
 }
 }

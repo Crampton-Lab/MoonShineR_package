@@ -2,6 +2,7 @@
 #'
 #' * predict_lux() predicts moonlight, sunlight, and/or twilight ground illumination in lux for any defined geographical location and time period. It creates a data.frame output and automatically plot to the console. Automatic export of the table (.csv) and plot (.pdf) is optional.
 #' * User is informed about the presence of lunar eclipse during the simulated period as a console messeage. The illuminance reduction during lunar eclipse is not modeled.
+#' * To create a moonlight or sunlight LED schedule for light re-creation using MoonShineP, user need to download the R script version of the MoonShineR: Moonlight scheduler or MoonShineR: Sunlight/twilight scheduler from GitHub repository: <https://github.com/Crampton-Lab/MoonShine>
 #' * To learn more about MoonShineR, see instruction manual: <https://lokpoon.github.io/moonshine_manual/overview.html>
 #' @param latitude `numeric`. Latitude in decimal degrees (e.g., `-4.21528`).
 #' @param longitude `numeric`. Longitude in decimal degrees (e.g., `-69.94056`).
