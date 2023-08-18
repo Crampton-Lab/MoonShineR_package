@@ -1,37 +1,23 @@
-#' Predict moonlight, sunlight, twilight ground illuminance
+#' Predict moonlight, sunlight, and twilight ground illuminance
 #'
 #' * predict_lux() predicts moonlight, sunlight, and/or twilight ground illumination in lux for any defined geographical location and time period. It creates a data.frame output and automatically plot to the console. Automatic export of the table (.csv) and plot (.pdf) is optional.
-#' * User is informed about the presence of lunar eclipse during the simulated period as a console messeage. The illuminance reduction during lunar eclipse is not modeled.
+#' * User is informed about the presence of lunar eclipse during the simulated period as a console message. The illuminance reduction during lunar eclipse is not modeled.
 #' * To create a moonlight or sunlight LED schedule for light re-creation using MoonShineP, user need to download the R script version of the MoonShineR: Moonlight scheduler or MoonShineR: Sunlight/twilight scheduler from GitHub repository: <https://github.com/Crampton-Lab/MoonShine>
 #' * To learn more about MoonShineR, see instruction manual: <https://lokpoon.github.io/moonshine_manual/overview.html>
 #' @param latitude `numeric`. Latitude in decimal degrees (e.g., `-4.21528`).
 #' @param longitude `numeric`. Longitude in decimal degrees (e.g., `-69.94056`).
 #' @param site_elev `numeric`. Site elevation in meters (e.g., `0` is sea level). Default is `0`. Elevation correction only applies to moonlight but not sunlight and twilight. Site elevation of a coordinate location can be obtained from <https://www.dcode.fr/earth-elevation>.
-#' @param time_zone `character`. Time zone for the location set (e.g., `“EST”`). Remember to change time_zone to corrospond it to the location set. For a list of time zone names, enter `OlsonNames(tzdir = NULL)` in R console. Use a time zone without DST to avoid confusion (e.g., use `"EST"` instead of `"America/New_York"`).
+#' @param time_zone `character`. Time zone for the location set (e.g., `“EST”`). Remember to change time_zone to correspond it to the location set. For a list of time zone names, enter `OlsonNames(tzdir = NULL)` in R console. Use a time zone without DST to avoid confusion (e.g., use `"EST"` instead of `"America/New_York"`).
 #' @param date_start `character`. Starting date of the simulation (`"YYYY-MM-DD"`).
 #' @param time_start `character`. Starting time of the simulation (`"hh:mm:ss"`). Default is `"00:00:00"`.
 #' @param duration_day `numeric`. Duration of the simulation in days.
 #' @param time_interval_minutes `numeric`.The temporal resolution of the simulation in minutes. E.g., `5` calculates the illuminance every 5 minutes. Using small time interval requires longer computation time. Default is `5`.
 #' @param darksky_value `numeric`. A baseline illuminance (in lux) added to the model to represent other constant nocturnal light sources (e.g., starlight and airglow). Default is `0.0008`. Change it to zero if a completely dark sky is preferred.
-#' @param illuminance_type_plot `character`. Choose one type of illuminance to plot. See options in the section below. Default is `"moon_final_lux_nighttime"`.
 #' @param output_directory `character`. Directory to save the output table (.csv) and plot (.pdf). Ignore output_directory if the two export options are turned OFF (i.e., `export_table = FALSE` and `export_plot = FALSE`).
 #' @param export_table `logical`. `TRUE` to export output .csv table to the output_directory. `FALSE` to disable. Default is `FALSE`.
 #' @param export_plot `logical`. `TRUE` to export output .pdf plot to the output_directory. `FALSE` to disable. Default is `FALSE`.
 #' @param plot_width `numeric`. The exported .pdf plot width in inch. Default is `11`.
 #' @param plot_height `numeric`. The exported .pdf plot height in inch. Default is `8.5`.
-#' @param plot_y_max `character` `"AUTO"`, or `numeric`. Let the plot y-axis scale automatically or manually set a y-axis upper limit. Affects both the plot in the plot window and the exported .pdf. Default is `"AUTO"`.
-#' @param plot_dayttime_gray_mask `logical`. `TRUE` to mask daytime plot line in gray. Affects both the plot in the plot window and the exported .pdf. `FALSE` to disable (plot line always black). Default is `TRUE`.
-#' @param plot_twilight `character`. Set the twilight period to plot as a gray area. `"astro"` is astronomical twilight (longest). `"nautic"` is nautical twilight (intermediate). `"civil"` is civil twilight (shortest). `"none"` to disable plotting of twilight period. Default is `"astro"`.
-#' @details
-#' # `illuminance_type_plot` options:
-#' * **"moon_final_lux"** plots only the illuminance of moonlight (plus the darksky_value) during both day and night.
-#' * **"moon_final_lux_nighttime"** plots only the illuminance of moonlight at night (no value during daytime, when `sun_altitude` > 0 degrees)
-#' * **"moonlight_twilight_nighttime"** plots the illuminance of moonlight plus twilight (no value during daytime, when `sun_altitude` > 0 degrees)
-#' * **"twilight"** plots only the illuminance of twilight (defined as the light when `sun_altitude` < 0 degrees).
-#' * **"sunlight"** plots only the illuminance of sunlight (defined as the light when `sun_altitude` > 0 degrees).
-#' * **"sunlight_twilight"** plots only the sum of sunlight and twilight.
-#' * **"total_illuminance_all"** plots all illuminance together, calculated as the sum of moonlight, twilight, and sunlight.
-#' Note: The above terms corresponding to the columns headers in the output table.
 #' @details
 #' # Columns found in the output data.frame/.csv table:
 #' * A series of astronomical and illuminance values are reported for every time stamp. In explanation,
