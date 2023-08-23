@@ -1,8 +1,9 @@
 #' Predict moonlight, sunlight, and twilight ground illuminance
 #'
-#' * predict_lux() predicts moonlight, sunlight, and/or twilight ground illumination in lux for any defined geographical location and time period. It creates a data.frame output and automatically plot to the console. Automatic export of the table (.csv) and plot (.pdf) is optional.
-#' * User is informed about the presence of lunar eclipse during the simulated period as a console message. The illuminance reduction during lunar eclipse is not modeled.
+#' * predict_lux() predicts moonlight, sunlight, and/or twilight ground illumination (in lux) for any defined geographical location and time period. It creates a data.frame output and automatically plot to the console. Automatic export of the table (.csv) is optional.
+#' * The presence of lunar eclipse during the simulated period is also reported as a console message. The illuminance reduction during lunar eclipse is not modeled.
 #' * To create a moonlight or sunlight LED schedule for light re-creation using MoonShineP, user need to download the R script version of the MoonShineR: Moonlight scheduler or MoonShineR: Sunlight/twilight scheduler from GitHub repository: <https://github.com/Crampton-Lab/MoonShine>
+#' * The R script version also have other simulation features, such as simulating the blocking of direct moonlight from horizon obstructions (e.g., tree line or ridgeline), and attenuation by random passing clouds.
 #' * To learn more about MoonShineR, see instruction manual: <https://lokpoon.github.io/moonshine_manual/overview.html>
 #' @param latitude `numeric`. Latitude in decimal degrees (e.g., `-4.21528`).
 #' @param longitude `numeric`. Longitude in decimal degrees (e.g., `-69.94056`).
@@ -15,9 +16,6 @@
 #' @param darksky_value `numeric`. A baseline illuminance (in lux) added to the model to represent other constant nocturnal light sources (e.g., starlight and airglow). Default is `0.0008`. Change it to zero if a completely dark sky is preferred.
 #' @param output_directory `character`. Directory to save the output table (.csv) and plot (.pdf). Ignore output_directory if the two export options are turned OFF (i.e., `export_table = FALSE` and `export_plot = FALSE`).
 #' @param export_table `logical`. `TRUE` to export output .csv table to the output_directory. `FALSE` to disable. Default is `FALSE`.
-#' @param export_plot `logical`. `TRUE` to export output .pdf plot to the output_directory. `FALSE` to disable. Default is `FALSE`.
-#' @param plot_width `numeric`. The exported .pdf plot width in inch. Default is `11`.
-#' @param plot_height `numeric`. The exported .pdf plot height in inch. Default is `8.5`.
 #' @details
 #' # Columns found in the output data.frame/.csv table:
 #' * A series of astronomical and illuminance values are reported for every time stamp. In explanation,
@@ -58,17 +56,14 @@
 #' moonlight_output <- predict_lux(latitude = -4.21528, longitude = -69.94056, site_elev = 0,
 #'                     time_zone = "EST", date_start = "2023-02-27", time_start = "18:00:00",
 #'                     duration_day = 14, time_interval_minutes = 5, darksky_value = 0.0008,
-#'                     illuminance_type_plot = "moon_final_lux_nighttime", output_directory = NULL,
-#'                     export_table = FALSE, export_plot = FALSE, plot_width = 11, plot_height = 8.5,
-#'                     plot_y_max = "AUTO",  plot_dayttime_gray_mask = TRUE, plot_twilight = "astro")
+#'                     output_directory = NULL, export_table = FALSE)
 
 
 
 
 predict_lux <- function(latitude = NULL, longitude = NULL, site_elev = 0, time_zone = NULL, date_start = NULL, time_start = "00:00:00",
-                        duration_day = NULL, time_interval_minutes = 5, darksky_value = 0.0008, illuminance_type_plot = "moon_final_lux_nighttime",
-                        output_directory = NULL, export_table = FALSE, export_plot = FALSE, horizon_obstruction = FALSE,
-                        plot_width = 11, plot_height = 8.5, plot_y_max = "AUTO",  plot_dayttime_gray_mask = TRUE, plot_twilight = "astro") {
+                        duration_day = NULL, time_interval_minutes = 5, darksky_value = 0.0008,
+                        output_directory = NULL, export_table = FALSE, export_plot = FALSE) {
 
   #---------------------------START OF ILLUMINATION COMPUTATION-------------------
 
@@ -180,75 +175,6 @@ predict_lux <- function(latitude = NULL, longitude = NULL, site_elev = 0, time_z
   if (export_table) {
     utils::write.csv(moon_value_table, paste0(output_directory, "/", "lux_calculator_output.csv"), row.names = TRUE)
   }
-
-# Create a clean ggplot theme
-  theme_rectangular_clean <-
-    ggplot2::theme(axis.line = ggplot2::element_line(),
-                   panel.grid.major = ggplot2::element_blank(),
-                   panel.grid.minor = ggplot2::element_blank(),
-                   panel.border = ggplot2::element_blank(),
-                   panel.background = ggplot2::element_blank()) +
-    ggplot2::theme(axis.text = ggplot2::element_text(size = 12, colour = 'black'),
-                   axis.title = ggplot2::element_text(size = 12, colour = 'black')) +
-    ggplot2::theme(plot.title = ggplot2::element_text(size = 12)) +
-    ggplot2::theme(plot.margin = ggplot2::unit(c(0.25,0.25,0.25,0.25),"cm"))
-
-  # Specify the time of night period and twilight period for shading
-  night_time <- dplyr::filter(moon_value_table, sun_altitude < 0) %>% dplyr::select(datetime)
-  night_time <- lubridate::as_datetime(night_time$datetime, tz = time_zone)
-
-  # Define twilight period
-  if(plot_twilight == "astro"){twilight_angle <- -18}
-  if(plot_twilight == "nautic"){twilight_angle <- -12}
-  if(plot_twilight == "civil"){twilight_angle <- -6}
-  if(plot_twilight == "none"){twilight_angle <- 0}
-
-  after_twilight_time <- dplyr::filter(moon_value_table, sun_altitude < (twilight_angle)) %>% dplyr::select(datetime)
-  after_twilight_time <- lubridate::as_datetime(after_twilight_time$datetime, tz =  time_zone)
-
-  day_time <- dplyr::filter(moon_value_table, sun_altitude > 0) %>% dplyr::select(datetime)
-  day_time <- lubridate::as_datetime(day_time$datetime, tz = time_zone)
-
-# Plotting:
-  if(plot_y_max == "AUTO"){
-  plot_output <- ggplot2::ggplot() + theme_rectangular_clean +
-    ggplot2::geom_rect(ggplot2::aes(xmin = night_time, # night period
-                           xmax = night_time + lubridate::dminutes(time_interval_minutes),
-                           ymin = 0, ymax = Inf), fill = "grey88", alpha = 1, na.rm = TRUE) +
-    ggplot2::geom_rect(ggplot2::aes(xmin = after_twilight_time, # after twilight
-                           xmax = after_twilight_time + lubridate::dminutes(time_interval_minutes),
-                           ymin = 0, ymax = Inf), fill = "grey80", alpha = 1, na.rm = TRUE) +
-    ggplot2::geom_line(data = moon_value_table, ggplot2::aes(x = datetime, y = eval(as.symbol(illuminance_type_plot))), colour = 'black', linewidth = 0.75) +
-    ggplot2::scale_x_datetime(date_breaks = "1 day") + # change the date break here for different x-axis label. A more specific format can be specified.
-    ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 0.5, hjust = 1)) + # rotate date label 90 degree.
-    ggplot2::labs(x = "", y = "predicted ground illuminance (lx)") } else
-      {plot_output <- ggplot2::ggplot() + theme_rectangular_clean +
-        ggplot2::geom_rect(ggplot2::aes(xmin = night_time, # night period
-                                        xmax = night_time + lubridate::dminutes(time_interval_minutes),
-                                        ymin = 0, ymax = Inf), fill = "grey88", alpha = 1, na.rm = TRUE) +
-        ggplot2::geom_rect(ggplot2::aes(xmin = after_twilight_time, # after twilight
-                                        xmax = after_twilight_time + lubridate::dminutes(time_interval_minutes),
-                                        ymin = 0, ymax = Inf), fill = "grey80", alpha = 1, na.rm = TRUE) +
-        ggplot2::geom_line(data = moon_value_table, ggplot2::aes(x = datetime, y = eval(as.symbol(illuminance_type_plot))), colour = 'black', linewidth = 0.75) +
-        ggplot2::scale_y_continuous(limits = c(0, plot_y_max), # change the y-axis range here
-                                    breaks = c(round(seq(from = 0, to = plot_y_max, length.out = 4), digits = 3))) + # change the y-axis breaks here
-        ggplot2::scale_x_datetime(date_breaks = "1 day") + # change the date break here for different x-axis label. A more specific format can be specified.
-        ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 0.5, hjust = 1)) + # rotate date label 90 degree.
-        ggplot2::labs(x = "", y = "predicted ground illuminance (lx)") }
-
-
-  if(plot_dayttime_gray_mask == TRUE){
-    plot_output <- plot_output +
-                    ggplot2::geom_rect(ggplot2::aes(xmin = day_time, # day time mask moonlight regression to gray color
-                                      xmax = day_time + lubridate::dminutes(time_interval_minutes),
-                                      ymin = 0, ymax = Inf), fill = "white", alpha = 0.85, na.rm = TRUE)}
-
-# Save plot:
-    if (export_plot) {
-      ggplot2::ggsave(plot = plot_output, paste0(output_directory, "/", "lux_calculator_output_plot.pdf"), width = plot_width, height = plot_height)
-    }
-
-  print(plot_output)
 
 
   #---------------------------Lunar eclipse warning---------------------------

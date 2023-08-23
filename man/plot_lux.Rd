@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_lux.R
 \name{plot_lux}
 \alias{plot_lux}
-\title{Predict moonlight, sunlight, twilight ground illuminance}
+\title{Create a plot from the illuminance prediction dataframe}
 \usage{
 plot_lux(
   df = NULL,
@@ -11,12 +11,14 @@ plot_lux(
   plot_dayttime_gray_mask = TRUE,
   plot_twilight = "astro",
   vertical_time_label = FALSE,
-  time_label_interval_hr = 6,
+  time_label_interval_hr = 24,
   time_labe_shift_hr = 0
 )
 }
 \arguments{
-\item{illuminance_type_plot}{\code{character}. Choose one type of illuminance to plot. See options in the section below. Default is \code{"moon_final_lux_nighttime"}.}
+\item{df}{\code{character}. Name of the data.frame object created by predict_lux().}
+
+\item{illuminance_type_plot}{\code{character}. Choose one type of illuminance to plot. See options in the next section. Default is \code{"moon_final_lux_nighttime"}.}
 
 \item{plot_y_max}{\code{character} \code{"AUTO"}, or \code{numeric}. Let the plot y-axis scale automatically or manually set a y-axis upper limit. Affects both the plot in the plot window and the exported .pdf. Default is \code{"AUTO"}.}
 
@@ -24,39 +26,15 @@ plot_lux(
 
 \item{plot_twilight}{\code{character}. Set the twilight period to plot as a gray area. \code{"astro"} is astronomical twilight (longest). \code{"nautic"} is nautical twilight (intermediate). \code{"civil"} is civil twilight (shortest). \code{"none"} to disable plotting of twilight period. Default is \code{"astro"}.}
 
-\item{latitude}{\code{numeric}. Latitude in decimal degrees (e.g., \code{-4.21528}).}
+\item{vertical_time_label}{\code{logical}. Rotate datetime label to be vertical.}
 
-\item{longitude}{\code{numeric}. Longitude in decimal degrees (e.g., \code{-69.94056}).}
+\item{time_label_interval_hr}{\code{numeric}. Set the datetime label in number of hours.}
 
-\item{site_elev}{\code{numeric}. Site elevation in meters (e.g., \code{0} is sea level). Default is \code{0}. Elevation correction only applies to moonlight but not sunlight and twilight. Site elevation of a coordinate location can be obtained from \url{https://www.dcode.fr/earth-elevation}.}
-
-\item{time_zone}{\code{character}. Time zone for the location set (e.g., \verb{“EST”}). Remember to change time_zone to corrospond it to the location set. For a list of time zone names, enter \code{OlsonNames(tzdir = NULL)} in R console. Use a time zone without DST to avoid confusion (e.g., use \code{"EST"} instead of \code{"America/New_York"}).}
-
-\item{date_start}{\code{character}. Starting date of the simulation (\code{"YYYY-MM-DD"}).}
-
-\item{time_start}{\code{character}. Starting time of the simulation (\code{"hh:mm:ss"}). Default is \code{"00:00:00"}.}
-
-\item{duration_day}{\code{numeric}. Duration of the simulation in days.}
-
-\item{time_interval_minutes}{\code{numeric}.The temporal resolution of the simulation in minutes. E.g., \code{5} calculates the illuminance every 5 minutes. Using small time interval requires longer computation time. Default is \code{5}.}
-
-\item{darksky_value}{\code{numeric}. A baseline illuminance (in lux) added to the model to represent other constant nocturnal light sources (e.g., starlight and airglow). Default is \code{0.0008}. Change it to zero if a completely dark sky is preferred.}
-
-\item{output_directory}{\code{character}. Directory to save the output table (.csv) and plot (.pdf). Ignore output_directory if the two export options are turned OFF (i.e., \code{export_table = FALSE} and \code{export_plot = FALSE}).}
-
-\item{export_table}{\code{logical}. \code{TRUE} to export output .csv table to the output_directory. \code{FALSE} to disable. Default is \code{FALSE}.}
-
-\item{export_plot}{\code{logical}. \code{TRUE} to export output .pdf plot to the output_directory. \code{FALSE} to disable. Default is \code{FALSE}.}
-
-\item{plot_width}{\code{numeric}. The exported .pdf plot width in inch. Default is \code{11}.}
-
-\item{plot_height}{\code{numeric}. The exported .pdf plot height in inch. Default is \code{8.5}.}
+\item{time_labe_shift_hr}{\code{numeric}. Shift the x-axis start time by certain number of hours for a more tidy datetime label. Use negative values to shift the start time to a time before the first data point (i.e., add a blank space to the left), as to avoid cutting out data.}
 }
 \description{
 \itemize{
-\item predict_lux() predicts moonlight, sunlight, and/or twilight ground illumination in lux for any defined geographical location and time period. It creates a data.frame output and automatically plot to the console. Automatic export of the table (.csv) and plot (.pdf) is optional.
-\item User is informed about the presence of lunar eclipse during the simulated period as a console messeage. The illuminance reduction during lunar eclipse is not modeled.
-\item To create a moonlight or sunlight LED schedule for light re-creation using MoonShineP, user need to download the R script version of the MoonShineR: Moonlight scheduler or MoonShineR: Sunlight/twilight scheduler from GitHub repository: \url{https://github.com/Crampton-Lab/MoonShine}
+\item plot_lux() plots the illuminance prediction dataframe generated by predict_lux().
 \item To learn more about MoonShineR, see instruction manual: \url{https://lokpoon.github.io/moonshine_manual/overview.html}
 }
 }
@@ -69,62 +47,15 @@ plot_lux(
 \item \strong{"sunlight"} plots only the illuminance of sunlight (defined as the light when \code{sun_altitude} > 0 degrees).
 \item \strong{"sunlight_twilight"} plots only the sum of sunlight and twilight.
 \item \strong{"total_illuminance_all"} plots all illuminance together, calculated as the sum of moonlight, twilight, and sunlight.
-Note: The above terms corresponding to the columns headers in the output table.
-}
-}
-
-\section{Columns found in the output data.frame/.csv table:}{
-\itemize{
-\item A series of astronomical and illuminance values are reported for every time stamp. In explanation,
-\item \strong{datetime} \code{POSIXct}. Datetime in \code{"YYYY-MM-DD hh:mm:ss"}.
-\item \strong{phase_angle} \code{numeric}. Phase angle of the moon in degree angle.
-\item \strong{fraction} \code{numeric}. Illuminated fraction of the moon.
-\item \strong{Z_moon} \code{numeric}. Zenith distance of the moon in degree angle (i.e., the angle of separation from directly overhead). > 90 means the moon is below the horizon.
-\item \strong{distance} \code{numeric}. The moon-Earth distance in km.
-\item \strong{sun_altitude} \code{numeric}. The sun altitude (relative to the horizon) in degree angle. Negative value means the sun is below the horizon.
-\item See above \strong{"illuminance_type_plot` options} for explanation of the rest of the columns that report different type of illuminance.
-}
-}
-
-\section{Plotting details:}{
-\itemize{
-\item The magnitude of moonlight and sunlight illuminance differs immensely. So depending on the \code{illuminance_type_plot} selected, the user might want to manually adjust the plot_y_max.
-\item \code{plot_dayttime_gray_mask} is \code{TRUE} by default to mask daytime illuminance in gray. This is particularly useful when plotting \code{"moon_final_lux"} to make it clear that moonlight during daytime should be ignored.
-\item Nighttime is always shaded in dark gray.
-\item Twilight period is shaded in light gray. The period of twilight can be adjusted with \code{plot_twilight}.
-}
-}
-
-\section{Attribution}{
-\itemize{
-\item Astronomical values used in calculating ground illuminance are provided by the R package suncalc (Thieurmel & Elmarhraoui, 2022).
-\item Atmospheric pressure at elevation is provided by the R package RPMODEL (Stocker et al., 2020).
+\item Note: The above terms corresponding to the columns headers in the predict_lux() generated dataframe.
 }
 }
 
 \examples{
-# Predict the nighttime moonlight illuminance in Leticia, Colombia,
-# for 14 days starting on 2023-02-27 at 6pm.
+# Plot a predict_lux generated dataframe named moonlight_output
 
-moonlight_output <- predict_lux(latitude = -4.21528, longitude = -69.94056, site_elev = 0,
-                    time_zone = "EST", date_start = "2023-02-27", time_start = "18:00:00",
-                    duration_day = 14, time_interval_minutes = 5, darksky_value = 0.0008,
-                    illuminance_type_plot = "moon_final_lux_nighttime", output_directory = NULL,
-                    export_table = FALSE, export_plot = FALSE, plot_width = 11, plot_height = 8.5,
-                    plot_y_max = "AUTO",  plot_dayttime_gray_mask = TRUE, plot_twilight = "astro")
-}
-\references{
-\itemize{
-\item Allen, C. W. (1976). Astrophysical quantities. Athelone Press.
-\item Austin, R. H., Phillips, B. F., & Webb, D. J. (1976). A method for calculating moonlight illuminance at the earth’s surface. The Journal of Applied Ecology, 13(3), 741.
-\item Buratti, B. J., Hillier, J. K., & Wang, M. (1996). The lunar opposition surge: Observations by clementine. Icarus, 124(2), 490–499.
-\item Hänel, A., Posch, T., Ribas, S. J., Aubé, M., Duriscoe, D., Jechow, A., Kollath, Z., Lolkema, D. E., Moore, C., Schmidt, N., Spoelstra, H., Wuchterl, G., & Kyba, C. C. M. (2018). Measuring night sky brightness: Methods and challenges. Journal of Quantitative Spectroscopy and Radiative Transfer, 205, 278–290.
-\item Krisciunas, K., & Schaefer, B. E. (1991). A model of the brightness of moonlight. Publications of the Astronomical Society of the Pacific, 103, 1033.
-\item Laue, E. G. (1970). The measurement of solar spectral irradiance at different terrestrial elevations. Solar Energy, 13(1), 43–57.
-\item Schaefer, B. E. (1990). Telescopic limiting magnitudes. Publications of the Astronomical Society of the Pacific, 102, 212.
-\item Seidelmann, P. K., United States Naval Observatory, & Great Britain (Eds.). (1992). Explanatory supplement to the Astronomical almanac (Rev. ed.). University Science Books.
-\item Stocker, B. D., Wang, H., Smith, N. G., Harrison, S. P., Keenan, T. F., Sandoval, D., Davis, T., & Prentice, I. C. (2020). P-model v1.0: An optimality-based light use efficiency model for simulating ecosystem gross primary production. Geoscientific Model Development, 13(3), 1545–1581.
-\item Thieurmel, B., & Elmarhraoui, A. (2022). suncalc: Compute sun position, sunlight phases, moon position and lunar phase. R package version 0.5.1. \url{https://CRAN.R-project.org/package=suncalc}
-}
+plot_lux(df = moonlight_output, illuminance_type_plot = "total_illuminance_all",
+         plot_y_max = 0.3,  plot_dayttime_gray_mask = TRUE, plot_twilight = "astro",
+         vertical_time_label = FALSE, time_label_interval_hr = 24, time_labe_shift_hr = 0)
 }
 \keyword{moonlight}

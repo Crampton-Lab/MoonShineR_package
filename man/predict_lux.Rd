@@ -2,7 +2,7 @@
 % Please edit documentation in R/predict_lux.R
 \name{predict_lux}
 \alias{predict_lux}
-\title{Predict moonlight, sunlight, twilight ground illuminance}
+\title{Predict moonlight, sunlight, and twilight ground illuminance}
 \usage{
 predict_lux(
   latitude = NULL,
@@ -14,16 +14,9 @@ predict_lux(
   duration_day = NULL,
   time_interval_minutes = 5,
   darksky_value = 8e-04,
-  illuminance_type_plot = "moon_final_lux_nighttime",
   output_directory = NULL,
   export_table = FALSE,
-  export_plot = FALSE,
-  horizon_obstruction = FALSE,
-  plot_width = 11,
-  plot_height = 8.5,
-  plot_y_max = "AUTO",
-  plot_dayttime_gray_mask = TRUE,
-  plot_twilight = "astro"
+  export_plot = FALSE
 )
 }
 \arguments{
@@ -33,7 +26,7 @@ predict_lux(
 
 \item{site_elev}{\code{numeric}. Site elevation in meters (e.g., \code{0} is sea level). Default is \code{0}. Elevation correction only applies to moonlight but not sunlight and twilight. Site elevation of a coordinate location can be obtained from \url{https://www.dcode.fr/earth-elevation}.}
 
-\item{time_zone}{\code{character}. Time zone for the location set (e.g., \verb{“EST”}). Remember to change time_zone to corrospond it to the location set. For a list of time zone names, enter \code{OlsonNames(tzdir = NULL)} in R console. Use a time zone without DST to avoid confusion (e.g., use \code{"EST"} instead of \code{"America/New_York"}).}
+\item{time_zone}{\code{character}. Time zone for the location set (e.g., \verb{“EST”}). Remember to change time_zone to correspond it to the location set. For a list of time zone names, enter \code{OlsonNames(tzdir = NULL)} in R console. Use a time zone without DST to avoid confusion (e.g., use \code{"EST"} instead of \code{"America/New_York"}).}
 
 \item{date_start}{\code{character}. Starting date of the simulation (\code{"YYYY-MM-DD"}).}
 
@@ -45,45 +38,19 @@ predict_lux(
 
 \item{darksky_value}{\code{numeric}. A baseline illuminance (in lux) added to the model to represent other constant nocturnal light sources (e.g., starlight and airglow). Default is \code{0.0008}. Change it to zero if a completely dark sky is preferred.}
 
-\item{illuminance_type_plot}{\code{character}. Choose one type of illuminance to plot. See options in the section below. Default is \code{"moon_final_lux_nighttime"}.}
-
 \item{output_directory}{\code{character}. Directory to save the output table (.csv) and plot (.pdf). Ignore output_directory if the two export options are turned OFF (i.e., \code{export_table = FALSE} and \code{export_plot = FALSE}).}
 
 \item{export_table}{\code{logical}. \code{TRUE} to export output .csv table to the output_directory. \code{FALSE} to disable. Default is \code{FALSE}.}
-
-\item{export_plot}{\code{logical}. \code{TRUE} to export output .pdf plot to the output_directory. \code{FALSE} to disable. Default is \code{FALSE}.}
-
-\item{plot_width}{\code{numeric}. The exported .pdf plot width in inch. Default is \code{11}.}
-
-\item{plot_height}{\code{numeric}. The exported .pdf plot height in inch. Default is \code{8.5}.}
-
-\item{plot_y_max}{\code{character} \code{"AUTO"}, or \code{numeric}. Let the plot y-axis scale automatically or manually set a y-axis upper limit. Affects both the plot in the plot window and the exported .pdf. Default is \code{"AUTO"}.}
-
-\item{plot_dayttime_gray_mask}{\code{logical}. \code{TRUE} to mask daytime plot line in gray. Affects both the plot in the plot window and the exported .pdf. \code{FALSE} to disable (plot line always black). Default is \code{TRUE}.}
-
-\item{plot_twilight}{\code{character}. Set the twilight period to plot as a gray area. \code{"astro"} is astronomical twilight (longest). \code{"nautic"} is nautical twilight (intermediate). \code{"civil"} is civil twilight (shortest). \code{"none"} to disable plotting of twilight period. Default is \code{"astro"}.}
 }
 \description{
 \itemize{
-\item predict_lux() predicts moonlight, sunlight, and/or twilight ground illumination in lux for any defined geographical location and time period. It creates a data.frame output and automatically plot to the console. Automatic export of the table (.csv) and plot (.pdf) is optional.
-\item User is informed about the presence of lunar eclipse during the simulated period as a console messeage. The illuminance reduction during lunar eclipse is not modeled.
+\item predict_lux() predicts moonlight, sunlight, and/or twilight ground illumination (in lux) for any defined geographical location and time period. It creates a data.frame output and automatically plot to the console. Automatic export of the table (.csv) is optional.
+\item The presence of lunar eclipse during the simulated period is also reported as a console message. The illuminance reduction during lunar eclipse is not modeled.
 \item To create a moonlight or sunlight LED schedule for light re-creation using MoonShineP, user need to download the R script version of the MoonShineR: Moonlight scheduler or MoonShineR: Sunlight/twilight scheduler from GitHub repository: \url{https://github.com/Crampton-Lab/MoonShine}
+\item The R script version also have other simulation features, such as simulating the blocking of direct moonlight from horizon obstructions (e.g., tree line or ridgeline), and attenuation by random passing clouds.
 \item To learn more about MoonShineR, see instruction manual: \url{https://lokpoon.github.io/moonshine_manual/overview.html}
 }
 }
-\section{\code{illuminance_type_plot} options:}{
-\itemize{
-\item \strong{"moon_final_lux"} plots only the illuminance of moonlight (plus the darksky_value) during both day and night.
-\item \strong{"moon_final_lux_nighttime"} plots only the illuminance of moonlight at night (no value during daytime, when \code{sun_altitude} > 0 degrees)
-\item \strong{"moonlight_twilight_nighttime"} plots the illuminance of moonlight plus twilight (no value during daytime, when \code{sun_altitude} > 0 degrees)
-\item \strong{"twilight"} plots only the illuminance of twilight (defined as the light when \code{sun_altitude} < 0 degrees).
-\item \strong{"sunlight"} plots only the illuminance of sunlight (defined as the light when \code{sun_altitude} > 0 degrees).
-\item \strong{"sunlight_twilight"} plots only the sum of sunlight and twilight.
-\item \strong{"total_illuminance_all"} plots all illuminance together, calculated as the sum of moonlight, twilight, and sunlight.
-Note: The above terms corresponding to the columns headers in the output table.
-}
-}
-
 \section{Columns found in the output data.frame/.csv table:}{
 \itemize{
 \item A series of astronomical and illuminance values are reported for every time stamp. In explanation,
@@ -120,9 +87,7 @@ Note: The above terms corresponding to the columns headers in the output table.
 moonlight_output <- predict_lux(latitude = -4.21528, longitude = -69.94056, site_elev = 0,
                     time_zone = "EST", date_start = "2023-02-27", time_start = "18:00:00",
                     duration_day = 14, time_interval_minutes = 5, darksky_value = 0.0008,
-                    illuminance_type_plot = "moon_final_lux_nighttime", output_directory = NULL,
-                    export_table = FALSE, export_plot = FALSE, plot_width = 11, plot_height = 8.5,
-                    plot_y_max = "AUTO",  plot_dayttime_gray_mask = TRUE, plot_twilight = "astro")
+                    output_directory = NULL, export_table = FALSE)
 }
 \references{
 \itemize{
