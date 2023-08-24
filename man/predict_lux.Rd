@@ -15,8 +15,7 @@ predict_lux(
   time_interval_minutes = 5,
   darksky_value = 8e-04,
   output_directory = NULL,
-  export_table = FALSE,
-  export_plot = FALSE
+  export_table = FALSE
 )
 }
 \arguments{
@@ -38,7 +37,7 @@ predict_lux(
 
 \item{darksky_value}{\code{numeric}. A baseline illuminance (in lux) added to the model to represent other constant nocturnal light sources (e.g., starlight and airglow). Default is \code{0.0008}. Change it to zero if a completely dark sky is preferred.}
 
-\item{output_directory}{\code{character}. Directory to save the output table (.csv) and plot (.pdf). Ignore output_directory if the two export options are turned OFF (i.e., \code{export_table = FALSE} and \code{export_plot = FALSE}).}
+\item{output_directory}{\code{character}. Directory to save the output table (.csv) and plot (.pdf). Ignore output_directory if the export options are turned OFF (i.e., \code{export_table = FALSE}).}
 
 \item{export_table}{\code{logical}. \code{TRUE} to export output .csv table to the output_directory. \code{FALSE} to disable. Default is \code{FALSE}.}
 }

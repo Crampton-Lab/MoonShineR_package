@@ -37,6 +37,13 @@
 plot_lux <- function(df = NULL, illuminance_type_plot = "total_illuminance_all", plot_y_max = 0.3,  plot_dayttime_gray_mask = TRUE, plot_twilight = "astro",
                      vertical_time_label = FALSE, time_label_interval_hr = 24, time_labe_shift_hr = 0) {
 
+  # Error messages for the arguments
+
+  if (missing(df)) {
+    stop("Argument 'df' is missing! See ??MoonShineR::plot_lux")
+  }
+
+  print("For all plotting features, see ??MoonShineR::plot_lux")
 
   #---------------------------PLOTTING
 

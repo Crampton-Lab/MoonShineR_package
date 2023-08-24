@@ -14,7 +14,7 @@
 #' @param duration_day `numeric`. Duration of the simulation in days.
 #' @param time_interval_minutes `numeric`.The temporal resolution of the simulation in minutes. E.g., `5` calculates the illuminance every 5 minutes. Using small time interval requires longer computation time. Default is `5`.
 #' @param darksky_value `numeric`. A baseline illuminance (in lux) added to the model to represent other constant nocturnal light sources (e.g., starlight and airglow). Default is `0.0008`. Change it to zero if a completely dark sky is preferred.
-#' @param output_directory `character`. Directory to save the output table (.csv) and plot (.pdf). Ignore output_directory if the two export options are turned OFF (i.e., `export_table = FALSE` and `export_plot = FALSE`).
+#' @param output_directory `character`. Directory to save the output table (.csv) and plot (.pdf). Ignore output_directory if the export options are turned OFF (i.e., `export_table = FALSE`).
 #' @param export_table `logical`. `TRUE` to export output .csv table to the output_directory. `FALSE` to disable. Default is `FALSE`.
 #' @details
 #' # Columns found in the output data.frame/.csv table:
@@ -63,8 +63,41 @@
 
 predict_lux <- function(latitude = NULL, longitude = NULL, site_elev = 0, time_zone = NULL, date_start = NULL, time_start = "00:00:00",
                         duration_day = NULL, time_interval_minutes = 5, darksky_value = 0.0008,
-                        output_directory = NULL, export_table = FALSE, export_plot = FALSE) {
+                        output_directory = NULL, export_table = FALSE) {
 
+# Error messages for the arguments
+
+  if (missing(latitude)) {
+    stop("Argument 'latitude' is missing! See ??MoonShineR::predict_lux")
+  }
+
+  if (missing(longitude)) {
+    stop("Argument 'longitude' is missing! See ??MoonShineR::predict_lux")
+  }
+
+  if (missing(time_zone)) {
+    stop("Argument 'time_zone' is missing! For a list of time zone names, enter OlsonNames(tzdir = NULL) in R console. See ??MoonShineR::predict_lux")
+  }
+
+  if (!is.character(time_start)) {
+    stop("Argument 'time_start' needs to be type character! See ??MoonShineR::predict_lux")
+  }
+
+  if (missing(date_start)) {
+    stop("Argument 'date_start' is missing! See ??MoonShineR::predict_lux")
+  }
+
+  if (!is.character(date_start)) {
+    stop("Argument 'date_start' needs to be type character! See ??MoonShineR::predict_lux")
+  }
+
+  if (missing(duration_day)) {
+    stop("Argument 'duration_day' is missing! See ??MoonShineR::predict_lux")
+  }
+
+  if (missing(duration_day)) {
+    stop("Argument 'duration_day' is missing! See ??MoonShineR::predict_lux")
+  }
   #---------------------------START OF ILLUMINATION COMPUTATION-------------------
 
   # Start time formatting
