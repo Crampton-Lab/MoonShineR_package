@@ -10,7 +10,7 @@ plot_lux(
   plot_y_max = 0.3,
   plot_dayttime_gray_mask = TRUE,
   plot_twilight = "astro",
-  vertical_time_label = FALSE,
+  vertical_time_label = TRUE,
   time_label_interval_hr = 24,
   time_labe_shift_hr = 0
 )
@@ -56,6 +56,6 @@ plot_lux(
 
 plot_lux(df = moonlight_output, illuminance_type_plot = "total_illuminance_all",
          plot_y_max = 0.3,  plot_dayttime_gray_mask = TRUE, plot_twilight = "astro",
-         vertical_time_label = FALSE, time_label_interval_hr = 24, time_labe_shift_hr = 0)
+         vertical_time_label = TRUE, time_label_interval_hr = 24, time_labe_shift_hr = 0)
 }
 \keyword{moonlight}
