@@ -25,12 +25,13 @@
 #' * **Z_moon** `numeric`. Zenith distance of the moon in degree angle (i.e., the angle of separation from directly overhead). > 90 means the moon is below the horizon.
 #' * **distance** `numeric`. The moon-Earth distance in km.
 #' * **sun_altitude** `numeric`. The sun altitude (relative to the horizon) in degree angle. Negative value means the sun is below the horizon.
-#' * See above **"illuminance_type_plot` options** for explanation of the rest of the columns that report different type of illuminance.
-#' # Plotting details:
-#' * The magnitude of moonlight and sunlight illuminance differs immensely. So depending on the `illuminance_type_plot` selected, the user might want to manually adjust the plot_y_max.
-#' * `plot_dayttime_gray_mask` is `TRUE` by default to mask daytime illuminance in gray. This is particularly useful when plotting `"moon_final_lux"` to make it clear that moonlight during daytime should be ignored.
-#' * Nighttime is always shaded in dark gray.
-#' * Twilight period is shaded in light gray. The period of twilight can be adjusted with `plot_twilight`.
+#' * **"moon_final_lux"** plots only the illuminance of moonlight (plus the darksky_value) during both day and night.
+#' * **"moon_final_lux_nighttime"** plots only the illuminance of moonlight at night (no value during daytime, when `sun_altitude` > 0 degrees)
+#' * **"moonlight_twilight_nighttime"** plots the illuminance of moonlight plus twilight (no value during daytime, when `sun_altitude` > 0 degrees)
+#' * **"twilight"** plots only the illuminance of twilight (defined as the light when `sun_altitude` < 0 degrees).
+#' * **"sunlight"** plots only the illuminance of sunlight (defined as the light when `sun_altitude` > 0 degrees).
+#' * **"sunlight_twilight"** plots only the sum of sunlight and twilight.
+#' * **"total_illuminance_all"** plots all illuminance together, calculated as the sum of moonlight, twilight, and sunlight.
 #' # Attribution
 #' * Astronomical values used in calculating ground illuminance are provided by the R package suncalc (Thieurmel & Elmarhraoui, 2022).
 #' * Atmospheric pressure at elevation is provided by the R package RPMODEL (Stocker et al., 2020).

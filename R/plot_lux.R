@@ -20,6 +20,11 @@
 #' * **"sunlight_twilight"** plots only the sum of sunlight and twilight.
 #' * **"total_illuminance_all"** plots all illuminance together, calculated as the sum of moonlight, twilight, and sunlight.
 #' * Note: The above terms corresponding to the columns headers in the predict_lux() generated dataframe.
+#' # Notes:
+#' * The magnitude of moonlight and sunlight illuminance diffsers immensely. So depending on the `illuminance_type_plot` selected, the user might want to manually adjust the plot_y_max.
+#' * `plot_dayttime_gray_mask` is `TRUE` by default to mask daytime illuminance in gray. This is particularly useful when plotting `"moon_final_lux"` to make it clear that moonlight during daytime should be ignored.
+#' * Nighttime is always shaded in dark gray.
+#' * Twilight period is shaded in light gray. The period of twilight can be adjusted with `plot_twilight`.
 #' @keywords moonlight
 #' @import magrittr
 #' @import dplyr

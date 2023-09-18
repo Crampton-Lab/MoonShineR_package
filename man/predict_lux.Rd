@@ -59,16 +59,13 @@ predict_lux(
 \item \strong{Z_moon} \code{numeric}. Zenith distance of the moon in degree angle (i.e., the angle of separation from directly overhead). > 90 means the moon is below the horizon.
 \item \strong{distance} \code{numeric}. The moon-Earth distance in km.
 \item \strong{sun_altitude} \code{numeric}. The sun altitude (relative to the horizon) in degree angle. Negative value means the sun is below the horizon.
-\item See above \strong{"illuminance_type_plot` options} for explanation of the rest of the columns that report different type of illuminance.
-}
-}
-
-\section{Plotting details:}{
-\itemize{
-\item The magnitude of moonlight and sunlight illuminance differs immensely. So depending on the \code{illuminance_type_plot} selected, the user might want to manually adjust the plot_y_max.
-\item \code{plot_dayttime_gray_mask} is \code{TRUE} by default to mask daytime illuminance in gray. This is particularly useful when plotting \code{"moon_final_lux"} to make it clear that moonlight during daytime should be ignored.
-\item Nighttime is always shaded in dark gray.
-\item Twilight period is shaded in light gray. The period of twilight can be adjusted with \code{plot_twilight}.
+\item \strong{"moon_final_lux"} plots only the illuminance of moonlight (plus the darksky_value) during both day and night.
+\item \strong{"moon_final_lux_nighttime"} plots only the illuminance of moonlight at night (no value during daytime, when \code{sun_altitude} > 0 degrees)
+\item \strong{"moonlight_twilight_nighttime"} plots the illuminance of moonlight plus twilight (no value during daytime, when \code{sun_altitude} > 0 degrees)
+\item \strong{"twilight"} plots only the illuminance of twilight (defined as the light when \code{sun_altitude} < 0 degrees).
+\item \strong{"sunlight"} plots only the illuminance of sunlight (defined as the light when \code{sun_altitude} > 0 degrees).
+\item \strong{"sunlight_twilight"} plots only the sum of sunlight and twilight.
+\item \strong{"total_illuminance_all"} plots all illuminance together, calculated as the sum of moonlight, twilight, and sunlight.
 }
 }
 

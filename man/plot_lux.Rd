@@ -51,6 +51,15 @@ plot_lux(
 }
 }
 
+\section{Notes:}{
+\itemize{
+\item The magnitude of moonlight and sunlight illuminance diffsers immensely. So depending on the \code{illuminance_type_plot} selected, the user might want to manually adjust the plot_y_max.
+\item \code{plot_dayttime_gray_mask} is \code{TRUE} by default to mask daytime illuminance in gray. This is particularly useful when plotting \code{"moon_final_lux"} to make it clear that moonlight during daytime should be ignored.
+\item Nighttime is always shaded in dark gray.
+\item Twilight period is shaded in light gray. The period of twilight can be adjusted with \code{plot_twilight}.
+}
+}
+
 \examples{
 # Plot a predict_lux generated dataframe named moonlight_output
 
