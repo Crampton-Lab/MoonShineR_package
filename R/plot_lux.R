@@ -6,10 +6,11 @@
 #' @param illuminance_type_plot `character`. Choose one type of illuminance to plot. See options in the next section. Default is `"moon_final_lux_nighttime"`.
 #' @param plot_y_max `character` `"AUTO"`, or `numeric`. Let the plot y-axis scale automatically or manually set a y-axis upper limit. Affects both the plot in the plot window and the exported .pdf. Default is `"AUTO"`.
 #' @param plot_dayttime_gray_mask `logical`. `TRUE` to mask daytime plot line in gray. Affects both the plot in the plot window and the exported .pdf. `FALSE` to disable (plot line always black). Default is `TRUE`.
+#' @param plot_ecliipse_mask `logical`. `TRUE` to add a red shade during times of lunar eclipse. `FALSE` to disable (plot line always black). Default is `TRUE`.
 #' @param plot_twilight `character`. Set the twilight period to plot as a gray area. `"astro"` is astronomical twilight (longest). `"nautic"` is nautical twilight (intermediate). `"civil"` is civil twilight (shortest). `"none"` to disable plotting of twilight period. Default is `"astro"`.
 #' @param vertical_time_label `logical`. Rotate datetime label to be vertical.
 #' @param time_label_interval_hr `numeric`. Set the datetime label in number of hours.
-#' @param time_labe_shift_hr `numeric`. Shift the x-axis start time by certain number of hours for a more tidy datetime label. Use negative values to shift the start time to a time before the first data point (i.e., add a blank space to the left), as to avoid cutting out data.
+#' @param time_label_shift_hr `numeric`. Shift the x-axis start time by certain number of hours for a more tidy datetime label. Use negative values to shift the start time to a time before the first data point (i.e., add a blank space to the left), as to avoid cutting out data.
 #' @details
 #' # `illuminance_type_plot` options:
 #' * **"moon_final_lux"** plots only the illuminance of moonlight (plus the darksky_value) during both day and night.
@@ -33,14 +34,15 @@
 #' # Plot a predict_lux generated dataframe named moonlight_output
 #'
 #' plot_lux(df = moonlight_output, illuminance_type_plot = "total_illuminance_all",
-#'          plot_y_max = 0.3,  plot_dayttime_gray_mask = TRUE, plot_twilight = "astro",
-#'          vertical_time_label = TRUE, time_label_interval_hr = 24, time_labe_shift_hr = 0)
+#'          plot_y_max = 0.3,  plot_dayttime_gray_mask = TRUE, plot_eclipse_red_mask = TRUE,
+#'          plot_twilight = "astro", vertical_time_label = TRUE, time_label_interval_hr = 24,
+#'          time_label_shift_hr = 0)
 
 
 
 
-plot_lux <- function(df = NULL, illuminance_type_plot = "total_illuminance_all", plot_y_max = 0.3,  plot_dayttime_gray_mask = TRUE, plot_twilight = "astro",
-                     vertical_time_label = TRUE, time_label_interval_hr = 24, time_labe_shift_hr = 0) {
+plot_lux <- function(df = NULL, illuminance_type_plot = "total_illuminance_all", plot_y_max = 0.3,  plot_dayttime_gray_mask = TRUE, plot_eclipse_red_mask = TRUE, plot_twilight = "astro",
+                     vertical_time_label = TRUE, time_label_interval_hr = 24, time_label_shift_hr = 0) {
 
   # Error messages for the arguments
 
@@ -83,11 +85,14 @@ plot_lux <- function(df = NULL, illuminance_type_plot = "total_illuminance_all",
   day_time <- dplyr::filter(df, sun_altitude > 0) %>% dplyr::select(datetime)
   day_time <- lubridate::as_datetime(day_time$datetime, tz = lubridate::tz(df$datetime))
 
+  eclipse_time <- dplyr::filter(df, eclipse == TRUE) %>% dplyr::select(datetime)
+  eclipse_time <- lubridate::as_datetime(eclipse_time$datetime, tz = lubridate::tz(df$datetime))
+
   # Time label interval
   time_label <- paste0(time_label_interval_hr, " hour")
 
   # shift time label
-  shift <- time_labe_shift_hr * 60 * 60
+  shift <- time_label_shift_hr * 60 * 60
 
 # Plotting:
   if(plot_y_max == "AUTO"){
@@ -121,6 +126,14 @@ plot_lux <- function(df = NULL, illuminance_type_plot = "total_illuminance_all",
                     ggplot2::geom_rect(ggplot2::aes(xmin = day_time, # day time mask moonlight regression to gray color
                                       xmax = day_time + lubridate::dminutes(time_interval_minutes),
                                       ymin = 0, ymax = Inf), fill = "white", alpha = 0.85, na.rm = TRUE)}
+
+
+  if(plot_eclipse_red_mask == TRUE){
+    plot_output <- plot_output +
+      ggplot2::geom_rect(ggplot2::aes(xmin = eclipse_time, # day time mask moonlight regression to gray color
+                                      xmax = eclipse_time + lubridate::dminutes(time_interval_minutes),
+                                      ymin = 0, ymax = Inf), fill = "red", alpha = 0.85, na.rm = TRUE) +
+      ggplot2::geom_line(data = df, ggplot2::aes(x = datetime, y = eval(as.symbol(illuminance_type_plot))), colour = 'black', linewidth = 0.75)}
 
   if(vertical_time_label == TRUE){
     plot_output <- plot_output +

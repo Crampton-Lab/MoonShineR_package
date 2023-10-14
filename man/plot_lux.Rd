@@ -9,10 +9,11 @@ plot_lux(
   illuminance_type_plot = "total_illuminance_all",
   plot_y_max = 0.3,
   plot_dayttime_gray_mask = TRUE,
+  plot_eclipse_red_mask = TRUE,
   plot_twilight = "astro",
   vertical_time_label = TRUE,
   time_label_interval_hr = 24,
-  time_labe_shift_hr = 0
+  time_label_shift_hr = 0
 )
 }
 \arguments{
@@ -30,7 +31,9 @@ plot_lux(
 
 \item{time_label_interval_hr}{\code{numeric}. Set the datetime label in number of hours.}
 
-\item{time_labe_shift_hr}{\code{numeric}. Shift the x-axis start time by certain number of hours for a more tidy datetime label. Use negative values to shift the start time to a time before the first data point (i.e., add a blank space to the left), as to avoid cutting out data.}
+\item{time_label_shift_hr}{\code{numeric}. Shift the x-axis start time by certain number of hours for a more tidy datetime label. Use negative values to shift the start time to a time before the first data point (i.e., add a blank space to the left), as to avoid cutting out data.}
+
+\item{plot_ecliipse_mask}{\code{logical}. \code{TRUE} to add a red shade during times of lunar eclipse. \code{FALSE} to disable (plot line always black). Default is \code{TRUE}.}
 }
 \description{
 \itemize{
@@ -64,7 +67,8 @@ plot_lux(
 # Plot a predict_lux generated dataframe named moonlight_output
 
 plot_lux(df = moonlight_output, illuminance_type_plot = "total_illuminance_all",
-         plot_y_max = 0.3,  plot_dayttime_gray_mask = TRUE, plot_twilight = "astro",
-         vertical_time_label = TRUE, time_label_interval_hr = 24, time_labe_shift_hr = 0)
+         plot_y_max = 0.3,  plot_dayttime_gray_mask = TRUE, plot_eclipse_red_mask = TRUE,
+         plot_twilight = "astro", vertical_time_label = TRUE, time_label_interval_hr = 24,
+         time_label_shift_hr = 0)
 }
 \keyword{moonlight}

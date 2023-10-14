@@ -66,6 +66,8 @@ predict_lux <- function(latitude = NULL, longitude = NULL, site_elev = 0, time_z
                         duration_day = NULL, time_interval_minutes = 5, darksky_value = 0.0008,
                         output_directory = NULL, export_table = FALSE) {
 
+
+
 # Error messages for the arguments
 
   if (missing(latitude)) {
@@ -114,7 +116,12 @@ predict_lux <- function(latitude = NULL, longitude = NULL, site_elev = 0, time_z
   time_interval_list <- seq(1, number_of_interval, by = 1)
 
   # Create a progress bar object
-  #pb <- progress_bar$new(total = length(time_interval_list))
+  pb <- progress::progress_bar$new(
+    format = "[:bar] :percent",
+    total = length(time_interval_list),
+    clear = FALSE,
+    width = 100
+  )
 
   # Fill in empty data frame with suncalc data
   for (i in time_interval_list) {
@@ -125,6 +132,7 @@ predict_lux <- function(latitude = NULL, longitude = NULL, site_elev = 0, time_z
     moon_value_table[i, "distance"] <- suncalc::getMoonPosition(date = date_time_start + (i - 1) * time_interval_minutes * 60, lat = latitude, lon = longitude)[1, "distance"] # distance = moon/Earth distance in km
     moon_value_table[i, "sun_altitude"] <- REdaS::rad2deg(suncalc::getSunlightPosition(date = date_time_start + (i - 1) * time_interval_minutes * 60, lat = latitude, lon = longitude, keep = c("altitude"))[1, "altitude"]) # sun_altitude = altitude of the sun in degree
     #pb$tick() # Update the progress bar
+    pb$tick()
   }
   moon_value_table <- subset(moon_value_table, select = -c(x))
 
@@ -203,6 +211,28 @@ predict_lux <- function(latitude = NULL, longitude = NULL, site_elev = 0, time_z
 
   moon_value_table <- subset(moon_value_table, select = -c(atm_ext, m, illuminance_temp_lux))
 
+  #---------------------------ADD ECLIPSE COLUMN---------------------------
+  # MoonShineR warns the user if an eclipse occurs during a simulation, and it reports the start and end time of the simulation.
+  # However, MoonShineR does not simulate the reduction in moon ground illuminance associated with the eclipse.
+
+  # Define the condition for eclipse as a logical vector
+  eclipse_condition <- abs(moon_value_table$phase_angle) < 1.5 & moon_value_table$sun_altitude < 0
+
+  # Add the new column 'eclipse' to moon_value_table
+  moon_value_table$eclipse <- eclipse_condition
+
+  # Check if any eclipse occurs and print a message accordingly
+  if (any(eclipse_condition)) {
+    print("The calculation is completed. ECLIPSE IN SIMULATION!!!")
+    # You can still use 'which' to index the rows where eclipse occurs if you need
+    moon_value_table[which(eclipse_condition == TRUE),]
+  } else {
+    print("The calculation is completed. No eclipse in simulation")
+  }
+
+  # Return table
+  return(moon_value_table)
+
   #---------------------------END OF ILLUMINATION COMPUTATION--------------------
 
 # Save moon table csv file
@@ -213,19 +243,19 @@ predict_lux <- function(latitude = NULL, longitude = NULL, site_elev = 0, time_z
 
   #---------------------------Lunar eclipse warning---------------------------
 
-  # MoonShineR warns the user if an eclipse occurs during a simulation, and it reports the start and end time of the simulation.
-  # However, MoonShineR does not simulate the reduction in moon ground illuminance associated with the eclipse.
-
-  if (any(abs(moon_value_table$phase_angle) < 1.5 & moon_value_table$sun_altitude < 0)) { # eclipse defined as a moon with phase angle < 1.5 during nighttime
-    print("The calculation is completed. ECLIPSE IN SIMULATION!!!")
-    eclipse_list <- (abs(moon_value_table$phase_angle) < 1.5 & moon_value_table$sun_altitude < 0)
-    moon_value_table[which(eclipse_list == TRUE),]
-  } else {
-    print("The calculation is completed. No eclipse in simulation")
-  }
-
-  # Return table
-  return(moon_value_table)
+  # # MoonShineR warns the user if an eclipse occurs during a simulation, and it reports the start and end time of the simulation.
+  # # However, MoonShineR does not simulate the reduction in moon ground illuminance associated with the eclipse.
+  #
+  # if (any(abs(moon_value_table$phase_angle) < 1.5 & moon_value_table$sun_altitude < 0)) { # eclipse defined as a moon with phase angle < 1.5 during nighttime
+  #   print("The calculation is completed. ECLIPSE IN SIMULATION!!!")
+  #   eclipse_list <- (abs(moon_value_table$phase_angle) < 1.5 & moon_value_table$sun_altitude < 0)
+  #   moon_value_table[which(eclipse_list == TRUE),]
+  # } else {
+  #   print("The calculation is completed. No eclipse in simulation")
+  # }
+  #
+  # # Return table
+  # return(moon_value_table)
 
   #---------------------------END OF SCRIPT---------------------------
 }
