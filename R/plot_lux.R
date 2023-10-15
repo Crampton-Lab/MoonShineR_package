@@ -6,7 +6,7 @@
 #' @param illuminance_type_plot `character`. Choose one type of illuminance to plot. See options in the next section. Default is `"moon_final_lux_nighttime"`.
 #' @param plot_y_max `character` `"AUTO"`, or `numeric`. Let the plot y-axis scale automatically or manually set a y-axis upper limit. Affects both the plot in the plot window and the exported .pdf. Default is `"AUTO"`.
 #' @param plot_dayttime_gray_mask `logical`. `TRUE` to mask daytime plot line in gray. Affects both the plot in the plot window and the exported .pdf. `FALSE` to disable (plot line always black). Default is `TRUE`.
-#' @param plot_ecliipse_mask `logical`. `TRUE` to add a red shade during times of lunar eclipse. `FALSE` to disable (plot line always black). Default is `TRUE`.
+#' @param plot_ecliipse_mask `logical`. `TRUE` to add a red shade during times of lunar eclipse as a warning that those illuminance prediction might be overestimating. `FALSE` to disable (plot line always black). Default is `TRUE`.
 #' @param plot_twilight `character`. Set the twilight period to plot as a gray area. `"astro"` is astronomical twilight (longest). `"nautic"` is nautical twilight (intermediate). `"civil"` is civil twilight (shortest). `"none"` to disable plotting of twilight period. Default is `"astro"`.
 #' @param vertical_time_label `logical`. Rotate datetime label to be vertical.
 #' @param time_label_interval_hr `numeric`. Set the datetime label in number of hours.

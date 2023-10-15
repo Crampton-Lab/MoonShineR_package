@@ -59,13 +59,14 @@ predict_lux(
 \item \strong{Z_moon} \code{numeric}. Zenith distance of the moon in degree angle (i.e., the angle of separation from directly overhead). > 90 means the moon is below the horizon.
 \item \strong{distance} \code{numeric}. The moon-Earth distance in km.
 \item \strong{sun_altitude} \code{numeric}. The sun altitude (relative to the horizon) in degree angle. Negative value means the sun is below the horizon.
-\item \strong{"moon_final_lux"} plots only the illuminance of moonlight (plus the darksky_value) during both day and night.
-\item \strong{"moon_final_lux_nighttime"} plots only the illuminance of moonlight at night (no value during daytime, when \code{sun_altitude} > 0 degrees)
-\item \strong{"moonlight_twilight_nighttime"} plots the illuminance of moonlight plus twilight (no value during daytime, when \code{sun_altitude} > 0 degrees)
-\item \strong{"twilight"} plots only the illuminance of twilight (defined as the light when \code{sun_altitude} < 0 degrees).
-\item \strong{"sunlight"} plots only the illuminance of sunlight (defined as the light when \code{sun_altitude} > 0 degrees).
-\item \strong{"sunlight_twilight"} plots only the sum of sunlight and twilight.
-\item \strong{"total_illuminance_all"} plots all illuminance together, calculated as the sum of moonlight, twilight, and sunlight.
+\item \strong{"moon_final_lux"} \code{numeric}. Only the illuminance of moonlight (plus the darksky_value) during both day and night.
+\item \strong{"moon_final_lux_nighttime"} \code{numeric}. Only the illuminance of moonlight at night (no value during daytime, when \code{sun_altitude} > 0 degrees)
+\item \strong{"moonlight_twilight_nighttime"} \code{numeric}. The illuminance of moonlight plus twilight (no value during daytime, when \code{sun_altitude} > 0 degrees)
+\item \strong{"twilight"} \code{numeric}. Only the illuminance of twilight (defined as the light when \code{sun_altitude} < 0 degrees).
+\item \strong{"sunlight"} \code{numeric}. Only the illuminance of sunlight (defined as the light when \code{sun_altitude} > 0 degrees).
+\item \strong{"sunlight_twilight"} \code{numeric}. The sum of sunlight and twilight.
+\item \strong{"total_illuminance_all"} \code{numeric}. All illuminance together, calculated as the sum of moonlight, twilight, and sunlight.
+\item \strong{"eclipse"} \code{logical}. The presence of a lunar eclipse (all kinds), including penumbral lunar eclipse.
 }
 }
 

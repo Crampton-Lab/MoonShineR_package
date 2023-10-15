@@ -25,13 +25,14 @@
 #' * **Z_moon** `numeric`. Zenith distance of the moon in degree angle (i.e., the angle of separation from directly overhead). > 90 means the moon is below the horizon.
 #' * **distance** `numeric`. The moon-Earth distance in km.
 #' * **sun_altitude** `numeric`. The sun altitude (relative to the horizon) in degree angle. Negative value means the sun is below the horizon.
-#' * **"moon_final_lux"** plots only the illuminance of moonlight (plus the darksky_value) during both day and night.
-#' * **"moon_final_lux_nighttime"** plots only the illuminance of moonlight at night (no value during daytime, when `sun_altitude` > 0 degrees)
-#' * **"moonlight_twilight_nighttime"** plots the illuminance of moonlight plus twilight (no value during daytime, when `sun_altitude` > 0 degrees)
-#' * **"twilight"** plots only the illuminance of twilight (defined as the light when `sun_altitude` < 0 degrees).
-#' * **"sunlight"** plots only the illuminance of sunlight (defined as the light when `sun_altitude` > 0 degrees).
-#' * **"sunlight_twilight"** plots only the sum of sunlight and twilight.
-#' * **"total_illuminance_all"** plots all illuminance together, calculated as the sum of moonlight, twilight, and sunlight.
+#' * **"moon_final_lux"** `numeric`. Only the illuminance of moonlight (plus the darksky_value) during both day and night.
+#' * **"moon_final_lux_nighttime"** `numeric`. Only the illuminance of moonlight at night (no value during daytime, when `sun_altitude` > 0 degrees)
+#' * **"moonlight_twilight_nighttime"** `numeric`. The illuminance of moonlight plus twilight (no value during daytime, when `sun_altitude` > 0 degrees)
+#' * **"twilight"** `numeric`. Only the illuminance of twilight (defined as the light when `sun_altitude` < 0 degrees).
+#' * **"sunlight"** `numeric`. Only the illuminance of sunlight (defined as the light when `sun_altitude` > 0 degrees).
+#' * **"sunlight_twilight"** `numeric`. The sum of sunlight and twilight.
+#' * **"total_illuminance_all"** `numeric`. All illuminance together, calculated as the sum of moonlight, twilight, and sunlight.
+#' * **"eclipse"** `logical`. The presence of a lunar eclipse (all kinds), including penumbral lunar eclipse.
 #' # Attribution
 #' * Astronomical values used in calculating ground illuminance are provided by the R package suncalc (Thieurmel & Elmarhraoui, 2022).
 #' * Atmospheric pressure at elevation is provided by the R package RPMODEL (Stocker et al., 2020).

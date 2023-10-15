@@ -33,7 +33,7 @@ plot_lux(
 
 \item{time_label_shift_hr}{\code{numeric}. Shift the x-axis start time by certain number of hours for a more tidy datetime label. Use negative values to shift the start time to a time before the first data point (i.e., add a blank space to the left), as to avoid cutting out data.}
 
-\item{plot_ecliipse_mask}{\code{logical}. \code{TRUE} to add a red shade during times of lunar eclipse. \code{FALSE} to disable (plot line always black). Default is \code{TRUE}.}
+\item{plot_ecliipse_mask}{\code{logical}. \code{TRUE} to add a red shade during times of lunar eclipse as a warning that those illuminance prediction might be overestimating. \code{FALSE} to disable (plot line always black). Default is \code{TRUE}.}
 }
 \description{
 \itemize{
