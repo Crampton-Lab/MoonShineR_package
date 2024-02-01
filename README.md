@@ -1,5 +1,5 @@
 # MoonShineR_package
-## Updated Oct 30w, 2023
+## Updated Feb 1, 2024
 This site hosts the source code for the MoonShineR package.
 
 For further details, see MoonShine suite homepage: https://github.com/Crampton-Lab/MoonShine
