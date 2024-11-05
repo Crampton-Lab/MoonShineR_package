@@ -10,9 +10,9 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Depends:
-	suncalc (<= 0.5.1),
-	magrittr (<= 2.0.3),
-	dplyr (<= 1.1.4),
-	lubridate (<= 1.9.3),
-	REdaS (<= 0.9.3),
-	ggplot2 (<= 3.5.1)
+	suncalc,
+	magrittr,
+	dplyr,
+	lubridate,
+	REdaS,
+	ggplot2
