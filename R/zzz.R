@@ -1,6 +1,6 @@
 .onAttach <- function(libname, pkgname) {
   message("MoonShineR v1.1 is tested on these dependency package versions:
-  - suncalc (<= 0.5.1),
+- suncalc (<= 0.5.1),
 - magrittr (<= 2.0.3),
 - lubridate (<= 1.9.3),
 - REdaS (<= 0.9.4),
