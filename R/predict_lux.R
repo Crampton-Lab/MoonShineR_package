@@ -152,7 +152,18 @@ predict_lux <- function(latitude = NULL, longitude = NULL, site_elev = 0, time_z
   moon_value_table$illuminance_temp_lux <- illuminance_temp * 10.7639 # Convert to lux
 
   # Correct for the effect of site elevation
-  atm_pressure_relative_to_sea <- rpmodel::patm(site_elev, patm0 = 101325) / 101325 # The atmospheric pressure at the site elevation relative to sea level
+  # The atmospheric pressure at the site elevation relative to sea level
+  g <- 9.80665  # gravity constant in m/s^2
+  L <- 0.0065   # mean adiabatic lapse rate in K/m
+  M <- 0.028963 # molecular weight of dry air in kg/mol
+  R <- 8.3145   # universal gas constant in J/(mol*K)
+  TK0 <- 298.15 # standard temperature in K (25 degrees Celsius)
+  patm0 <- 101325  # standard atmospheric pressure at sea level in Pa
+
+  # Compute atmospheric pressure relative to sea level
+  atm_pressure_relative_to_sea <- (patm0 * (1 - L * site_elev / TK0)^(g * M / (R * L))) / 101325
+
+
   sea_555nm <- 18.964 * exp(-0.229 * 1) # Sea level irradiance at 555nm. Function extracted from figure 1 of Laue (1970)
   elevated_555nm <- 18.964 * exp(-0.229 * atm_pressure_relative_to_sea) # Sea level irradiance at 555nm. Function extracted from figure 1 of Laue (1970)
   increase_factor_elev <- elevated_555nm / sea_555nm # relative increase in illuminance due to elevation
