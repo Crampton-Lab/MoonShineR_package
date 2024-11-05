@@ -11,7 +11,7 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Imports:
 	suncalc,
-	rpmodel (= 1.2.0),
+	rpmodel (<= 1.2.0),
 	magrittr,
 	dplyr,
 	lubridate,
