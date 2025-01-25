@@ -2,7 +2,7 @@ Package: MoonShineR
 Title: Predict Moonlight, Sunlight, and/or Twilight Ground Illuminance
 Version: 1.1
 Authors@R: 
-    person("Lok", "Poonnn", , "poonchiulok@gmail.com", role = c("aut", "cre"),
+    person("Lok", "Poon", , "poonchiulok@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-3547-1614"))
 Description: Predict moonlight, sunlight, and/or twilight ground illuminance. Intended for use in field studies where a biologist requires moonlight illuminance values as a model predictor variable.
 License: use_gpl3_license()
