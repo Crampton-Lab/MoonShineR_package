@@ -88,6 +88,11 @@ plot_lux <- function(df = NULL, illuminance_type_plot = "total_illuminance_all",
   eclipse_time <- dplyr::filter(df, eclipse == TRUE) %>% dplyr::select(datetime)
   eclipse_time <- lubridate::as_datetime(eclipse_time$datetime, tz = lubridate::tz(df$datetime))
 
+  # Time label interval
+  time_label <- paste0(time_label_interval_hr, " hour")
+
+  # shift time label
+  shift <- time_label_shift_hr * 60 * 60
 
   # Mask data frames
   night_mask_df <- data.frame(
