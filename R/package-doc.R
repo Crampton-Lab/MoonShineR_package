@@ -1,8 +1,6 @@
 #' MoonShineR Package
 #'
-#' Description of what the package does.
+#' Predict and plot natural light intensity from moonlight, sunlight, and twilight.
 #'
-#' @docType package
-#' @name MoonShineR
-#' @aliases MoonShineR
-NULL
+#' @keywords internal
+"_PACKAGE"

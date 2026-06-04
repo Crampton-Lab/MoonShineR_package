@@ -8,7 +8,7 @@ plot_lux(
   df = NULL,
   illuminance_type_plot = "total_illuminance_all",
   plot_y_max = 0.3,
-  plot_dayttime_gray_mask = TRUE,
+  plot_daytime_gray_mask = TRUE,
   plot_eclipse_red_mask = TRUE,
   plot_twilight = "astro",
   vertical_time_label = TRUE,
@@ -17,13 +17,15 @@ plot_lux(
 )
 }
 \arguments{
-\item{df}{\code{character}. Name of the data.frame object created by predict_lux().}
+\item{df}{\code{data.frame}. Data frame created by \code{predict_lux()}.}
 
 \item{illuminance_type_plot}{\code{character}. Choose one type of illuminance to plot. See options in the next section. Default is \code{"moon_final_lux_nighttime"}.}
 
-\item{plot_y_max}{\code{character} \code{"AUTO"}, or \code{numeric}. Let the plot y-axis scale automatically or manually set a y-axis upper limit. Affects both the plot in the plot window and the exported .pdf. Default is \code{"AUTO"}.}
+\item{plot_y_max}{\code{numeric} or \code{"AUTO"}. Upper limit of the y-axis. Use \code{"AUTO"} to let ggplot choose the scale automatically. Default is \code{0.3}.}
 
-\item{plot_dayttime_gray_mask}{\code{logical}. \code{TRUE} to mask daytime plot line in gray. Affects both the plot in the plot window and the exported .pdf. \code{FALSE} to disable (plot line always black). Default is \code{TRUE}.}
+\item{plot_daytime_gray_mask}{\code{logical}. \code{TRUE} to mask daytime plot line in gray. Affects both the plot in the plot window and the exported .pdf. \code{FALSE} to disable (plot line always black). Default is \code{TRUE}.}
+
+\item{plot_eclipse_red_mask}{\code{logical}. \code{TRUE} to add a red shade during times of lunar eclipse as a warning that those illuminance prediction might be overestimating. \code{FALSE} to disable (plot line always black). Default is \code{TRUE}.}
 
 \item{plot_twilight}{\code{character}. Set the twilight period to plot as a gray area. \code{"astro"} is astronomical twilight (longest). \code{"nautic"} is nautical twilight (intermediate). \code{"civil"} is civil twilight (shortest). \code{"none"} to disable plotting of twilight period. Default is \code{"astro"}.}
 
@@ -32,8 +34,6 @@ plot_lux(
 \item{time_label_interval_hr}{\code{numeric}. Set the datetime label in number of hours.}
 
 \item{time_label_shift_hr}{\code{numeric}. Shift the x-axis start time by certain number of hours for a more tidy datetime label. Use negative values to shift the start time to a time before the first data point (i.e., add a blank space to the left), as to avoid cutting out data.}
-
-\item{plot_eclipse_mask}{\code{logical}. \code{TRUE} to add a red shade during times of lunar eclipse as a warning that those illuminance prediction might be overestimating. \code{FALSE} to disable (plot line always black). Default is \code{TRUE}.}
 }
 \description{
 \itemize{
@@ -57,7 +57,7 @@ plot_lux(
 \section{Notes:}{
 \itemize{
 \item The magnitude of moonlight and sunlight illuminance diffsers immensely. So depending on the \code{illuminance_type_plot} selected, the user might want to manually adjust the plot_y_max.
-\item \code{plot_dayttime_gray_mask} is \code{TRUE} by default to mask daytime illuminance in gray. This is particularly useful when plotting \code{"moon_final_lux"} to make it clear that moonlight during daytime should be ignored.
+\item \code{plot_daytime_gray_mask} is \code{TRUE} by default to mask daytime illuminance in gray. This is particularly useful when plotting \code{"moon_final_lux"} to make it clear that moonlight during daytime should be ignored.
 \item Nighttime is always shaded in dark gray.
 \item Twilight period is shaded in light gray. The period of twilight can be adjusted with \code{plot_twilight}.
 }
@@ -67,7 +67,7 @@ plot_lux(
 # Plot a predict_lux generated dataframe named moonlight_output
 
 plot_lux(df = moonlight_output, illuminance_type_plot = "total_illuminance_all",
-         plot_y_max = 0.3,  plot_dayttime_gray_mask = TRUE, plot_eclipse_red_mask = TRUE,
+         plot_y_max = 0.3,  plot_daytime_gray_mask = TRUE, plot_eclipse_red_mask = TRUE,
          plot_twilight = "astro", vertical_time_label = TRUE, time_label_interval_hr = 24,
          time_label_shift_hr = 0)
 }
