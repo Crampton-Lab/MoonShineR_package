@@ -6,7 +6,7 @@
 #' @param illuminance_type_plot `character`. Choose one type of illuminance to plot. See options in the next section. Default is `"moon_final_lux_nighttime"`.
 #' @param plot_y_max `character` `"AUTO"`, or `numeric`. Let the plot y-axis scale automatically or manually set a y-axis upper limit. Affects both the plot in the plot window and the exported .pdf. Default is `"AUTO"`.
 #' @param plot_dayttime_gray_mask `logical`. `TRUE` to mask daytime plot line in gray. Affects both the plot in the plot window and the exported .pdf. `FALSE` to disable (plot line always black). Default is `TRUE`.
-#' @param plot_ecliipse_mask `logical`. `TRUE` to add a red shade during times of lunar eclipse as a warning that those illuminance prediction might be overestimating. `FALSE` to disable (plot line always black). Default is `TRUE`.
+#' @param plot_eclipse_mask `logical`. `TRUE` to add a red shade during times of lunar eclipse as a warning that those illuminance prediction might be overestimating. `FALSE` to disable (plot line always black). Default is `TRUE`.
 #' @param plot_twilight `character`. Set the twilight period to plot as a gray area. `"astro"` is astronomical twilight (longest). `"nautic"` is nautical twilight (intermediate). `"civil"` is civil twilight (shortest). `"none"` to disable plotting of twilight period. Default is `"astro"`.
 #' @param vertical_time_label `logical`. Rotate datetime label to be vertical.
 #' @param time_label_interval_hr `numeric`. Set the datetime label in number of hours.
@@ -88,6 +88,28 @@ plot_lux <- function(df = NULL, illuminance_type_plot = "total_illuminance_all",
   eclipse_time <- dplyr::filter(df, eclipse == TRUE) %>% dplyr::select(datetime)
   eclipse_time <- lubridate::as_datetime(eclipse_time$datetime, tz = lubridate::tz(df$datetime))
 
+
+  # Mask data frames
+  night_mask_df <- data.frame(
+    xmin = night_time,
+    xmax = night_time + lubridate::dminutes(time_interval_minutes)
+  )
+
+  twilight_mask_df <- data.frame(
+    xmin = after_twilight_time,
+    xmax = after_twilight_time + lubridate::dminutes(time_interval_minutes)
+  )
+
+  day_mask_df <- data.frame(
+    xmin = day_time,
+    xmax = day_time + lubridate::dminutes(time_interval_minutes)
+  )
+
+  eclipse_mask_df <- data.frame(
+    xmin = eclipse_time,
+    xmax = eclipse_time + lubridate::dminutes(time_interval_minutes)
+  )
+
   # Time label interval
   time_label <- paste0(time_label_interval_hr, " hour")
 
@@ -97,44 +119,85 @@ plot_lux <- function(df = NULL, illuminance_type_plot = "total_illuminance_all",
 # Plotting:
   if(plot_y_max == "AUTO"){
   plot_output <- ggplot2::ggplot() + theme_rectangular_clean +
-    ggplot2::geom_rect(ggplot2::aes(xmin = night_time, # night period
-                           xmax = night_time + lubridate::dminutes(time_interval_minutes),
-                           ymin = 0, ymax = Inf), fill = "grey88", alpha = 1, na.rm = TRUE) +
-    ggplot2::geom_rect(ggplot2::aes(xmin = after_twilight_time, # after twilight
-                           xmax = after_twilight_time + lubridate::dminutes(time_interval_minutes),
-                           ymin = 0, ymax = Inf), fill = "grey80", alpha = 1, na.rm = TRUE) +
-    ggplot2::geom_line(data = df, ggplot2::aes(x = datetime, y = eval(as.symbol(illuminance_type_plot))), colour = 'black', linewidth = 0.75) +
+    ggplot2::geom_rect(
+      data = night_mask_df,
+      ggplot2::aes(xmin = xmin, xmax = xmax, ymin = 0, ymax = Inf),
+      inherit.aes = FALSE,
+      fill = "grey88",
+      alpha = 1,
+      na.rm = TRUE
+    ) +
+    ggplot2::geom_rect(
+      data = twilight_mask_df,
+      ggplot2::aes(xmin = xmin, xmax = xmax, ymin = 0, ymax = Inf),
+      inherit.aes = FALSE,
+      fill = "grey80",
+      alpha = 1,
+      na.rm = TRUE
+    ) +
+    ggplot2::geom_line(data = df, ggplot2::aes(x = datetime, y = .data[[illuminance_type_plot]]), colour = 'black', linewidth = 0.75) +
     ggplot2::scale_x_datetime(date_breaks = time_label,  date_labels = "%Y %b %d %H:%M", limits = c(df$datetime[1] + shift, NA)) + # change the date break here for different x-axis label. A more specific format can be specified.
     ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 0.5, hjust = 1)) + # rotate date label 90 degree.
-    ggplot2::labs(x = "", y = "predicted ground illuminance (lx)") } else
-      {plot_output <- ggplot2::ggplot() + theme_rectangular_clean +
+    ggplot2::labs(x = "", y = "predicted ground illuminance (lx)") } else {
+      plot_output <- ggplot2::ggplot() + theme_rectangular_clean +
         ggplot2::geom_rect(ggplot2::aes(xmin = night_time, # night period
                                         xmax = night_time + lubridate::dminutes(time_interval_minutes),
                                         ymin = 0, ymax = Inf), fill = "grey88", alpha = 1, na.rm = TRUE) +
         ggplot2::geom_rect(ggplot2::aes(xmin = after_twilight_time, # after twilight
                                         xmax = after_twilight_time + lubridate::dminutes(time_interval_minutes),
                                         ymin = 0, ymax = Inf), fill = "grey80", alpha = 1, na.rm = TRUE) +
-        ggplot2::geom_line(data = df, ggplot2::aes(x = datetime, y = eval(as.symbol(illuminance_type_plot))), colour = 'black', linewidth = 0.75) +
+        ggplot2::geom_line(data = df, ggplot2::aes(x = datetime, y = .data[[illuminance_type_plot]]), colour = 'black', linewidth = 0.75) +
         ggplot2::scale_y_continuous(limits = c(0, plot_y_max), # change the y-axis range here
                                     breaks = c(round(seq(from = 0, to = plot_y_max, length.out = 4), digits = 3))) + # change the y-axis breaks here
         ggplot2::scale_x_datetime(date_breaks = time_label, date_labels = "%Y %b %d %H:%M", limits = c(df$datetime[1] + shift, NA)) + # change the date break here for different x-axis label. A more specific format can be specified.
         ggplot2::labs(x = "", y = "predicted ground illuminance (lx)") }
 
-
+  # Daytime mask
   if(plot_dayttime_gray_mask == TRUE){
     plot_output <- plot_output +
-                    ggplot2::geom_rect(ggplot2::aes(xmin = day_time, # day time mask moonlight regression to gray color
-                                      xmax = day_time + lubridate::dminutes(time_interval_minutes),
-                                      ymin = 0, ymax = Inf), fill = "white", alpha = 0.85, na.rm = TRUE)}
+      ggplot2::geom_rect(
+        data = day_mask_df,
+        ggplot2::aes(
+          xmin = xmin,
+          xmax = xmax,
+          ymin = 0,
+          ymax = Inf
+        ),
+        inherit.aes = FALSE,
+        fill = "white",
+        alpha = 0.85,
+        na.rm = TRUE
+      )
+  }
 
-
+  # Nighttime mask
   if(plot_eclipse_red_mask == TRUE){
     plot_output <- plot_output +
-      ggplot2::geom_rect(ggplot2::aes(xmin = eclipse_time, # day time mask moonlight regression to gray color
-                                      xmax = eclipse_time + lubridate::dminutes(time_interval_minutes),
-                                      ymin = 0, ymax = Inf), fill = "red", alpha = 0.85, na.rm = TRUE) +
-      ggplot2::geom_line(data = df, ggplot2::aes(x = datetime, y = eval(as.symbol(illuminance_type_plot))), colour = 'black', linewidth = 0.75)}
+      ggplot2::geom_rect(
+        data = eclipse_mask_df,
+        ggplot2::aes(
+          xmin = xmin,
+          xmax = xmax,
+          ymin = 0,
+          ymax = Inf
+        ),
+        inherit.aes = FALSE,
+        fill = "red",
+        alpha = 0.85,
+        na.rm = TRUE
+      ) +
+      ggplot2::geom_line(
+        data = df,
+        ggplot2::aes(
+          x = datetime,
+          y = .data[[illuminance_type_plot]]
+        ),
+        colour = "black",
+        linewidth = 0.75
+      )
+  }
 
+  # Vertical time label
   if(vertical_time_label == TRUE){
     plot_output <- plot_output +
       ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 0.5, hjust = 1))} # rotate date label 90 degree.
