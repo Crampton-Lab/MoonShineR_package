@@ -1,7 +1,8 @@
 # MoonShineR_package
-## Updated Feb 1, 2024
+## Updated June 4, 2026
+
 This site hosts the source code for the MoonShineR package.
 
 For further details, see MoonShine suite homepage: https://github.com/Crampton-Lab/MoonShine
 
-Citation: Poon, L., Jenks, I. T., Crampton, W. G. R. (2024). MoonShine: A software-hardware system for simulating moonlight ground illuminance and re-creating artificial moonlight cycles in a laboratory environment. Methods in Ecology and Evolution. Accepted for publication (Jan 30, 2024).
+Citation: Poon, L., Jenks, I. T., & Crampton, W. G. (2024). MoonShine: A software‐hardware system for simulating moonlight ground illuminance and re‐creating artificial moonlight cycles in a laboratory environment. _Methods in Ecology and Evolution_, _15_(4), 701-715. https://doi.org/10.1111/2041-210X.14299

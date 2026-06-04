@@ -8,7 +8,7 @@
 #' @param latitude `numeric`. Latitude in decimal degrees (e.g., `-4.21528`).
 #' @param longitude `numeric`. Longitude in decimal degrees (e.g., `-69.94056`).
 #' @param site_elev `numeric`. Site elevation in meters (e.g., `0` is sea level). Default is `0`. Elevation correction only applies to moonlight but not sunlight and twilight. Site elevation of a coordinate location can be obtained from <https://www.dcode.fr/earth-elevation>.
-#' @param time_zone `character`. Time zone for the location set (e.g., `“EST”`). Remember to change time_zone to correspond it to the location set. For a list of time zone names, enter `OlsonNames(tzdir = NULL)` in R console. Use a time zone without DST to avoid confusion (e.g., use `"EST"` instead of `"America/New_York"`).
+#' @param time_zone `character`. Time zone for the location set (e.g., `"EST"). Remember to change time_zone to correspond it to the location set. For a list of time zone names, enter `OlsonNames(tzdir = NULL)` in R console. Use a time zone without DST to avoid confusion (e.g., use `"EST"` instead of `"America/New_York"`).
 #' @param date_start `character`. Starting date of the simulation (`"YYYY-MM-DD"`).
 #' @param time_start `character`. Starting time of the simulation (`"hh:mm:ss"`). Default is `"00:00:00"`.
 #' @param duration_day `numeric`. Duration of the simulation in days.
@@ -38,7 +38,6 @@
 #' * Atmospheric pressure at elevation is provided by the R package RPMODEL (Stocker et al., 2020).
 #' @keywords moonlight
 #' @import magrittr
-#' @import dplyr
 #' @export
 #' @references
 #' * Allen, C. W. (1976). Astrophysical quantities. Athelone Press.
@@ -57,8 +56,10 @@
 #'
 #' moonlight_output <- predict_lux(latitude = -4.21528, longitude = -69.94056, site_elev = 0,
 #'                     time_zone = "EST", date_start = "2023-02-27", time_start = "18:00:00",
-#'                     duration_day = 14, time_interval_minutes = 5, darksky_value = 0.0008,
+#'                     duration_day = 2, time_interval_minutes = 15, darksky_value = 0.0008,
 #'                     output_directory = NULL, export_table = FALSE)
+#'
+#' moonlight_output #return completed data frame
 
 
 
@@ -242,15 +243,18 @@ predict_lux <- function(latitude = NULL, longitude = NULL, site_elev = 0, time_z
     print("The calculation is completed. No eclipse in simulation")
   }
 
-  # Return table
-  return(moon_value_table)
-
   #---------------------------END OF ILLUMINATION COMPUTATION--------------------
 
 # Save moon table csv file
   if (export_table) {
-    utils::write.csv(moon_value_table, paste0(output_directory, "/", "lux_calculator_output.csv"), row.names = TRUE)
+    utils::write.csv(
+      moon_value_table,
+      file.path(output_directory, "lux_calculator_output.csv"),
+      row.names = TRUE
+    )
   }
+
+  return(moon_value_table)
 
 
   #---------------------------Lunar eclipse warning---------------------------

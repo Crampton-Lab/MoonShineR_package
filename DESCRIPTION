@@ -1,18 +1,21 @@
 Package: MoonShineR
 Title: Predict Moonlight, Sunlight, and/or Twilight Ground Illuminance
-Version: 1.1
+Version: 1.1.0
 Authors@R: 
     person("Lok", "Poon", , "poonchiulok@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-3547-1614"))
-Description: Predict moonlight, sunlight, and/or twilight ground illuminance. Intended for use in field studies where a biologist requires moonlight illuminance values as a model predictor variable.
-License: use_gpl3_license()
+Description: Predicts ground-level illuminance from moonlight, sunlight, and twilight for specified locations and time periods. The package is intended for field studies in ecology and behavior where natural light levels are used as predictor variables. Methods are described in Poon, Jenks and Crampton (2024) doi: 10.1111/2041-210X.14299. Calculations use astronomical quantities from 'suncalc' and published illuminance models, including Austin et al. (1976) doi:10.2307/2402251 and Seidelmann (1992, ISBN: 0935702687).
+License: GPL-3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
 Depends:
-	suncalc,
-	magrittr,
-	dplyr,
-	lubridate,
-	REdaS,
-	ggplot2
+    R (>= 3.5.0)
+Imports:
+    suncalc,
+    magrittr,
+    dplyr,
+    lubridate,
+    REdaS,
+    ggplot2,
+    progress
