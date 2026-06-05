@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.17)  4 JUN 2026 17:21
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.17)  4 JUN 2026 18:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -349,8 +349,8 @@ File: l3backend-pdftex.def 2023-01-16 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count290
 \l__pdf_internal_box=\box58
 )
-(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/RtmpwOh5Q5/Rd2pdf8845
-31afc160/Rd2.aux)
+(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/RtmpUEeIW2/Rd2pdf9d93
+1dc53ee5/Rd2.aux)
 \openout1 = `Rd2.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 8.
@@ -388,10 +388,10 @@ LaTeX Font Info:    ... okay on input line 8.
 )
 Package hyperref Info: Link coloring ON on input line 8.
 
-(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/RtmpwOh5Q5/Rd2pdf8845
-31afc160/Rd2.out)
-(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/RtmpwOh5Q5/Rd2pdf8845
-31afc160/Rd2.out)
+(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/RtmpUEeIW2/Rd2pdf9d93
+1dc53ee5/Rd2.out)
+(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/RtmpUEeIW2/Rd2pdf9d93
+1dc53ee5/Rd2.out)
 \@outlinefile=\write4
 \openout4 = `Rd2.out'.
 
@@ -427,8 +427,8 @@ LaTeX Font Info:    Trying to load font information for U+rsfs on input line 28
 (/usr/local/texlive/2023/texmf-dist/tex/latex/jknapltx/ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 )
-(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/RtmpwOh5Q5/Rd2pdf8845
-31afc160/Rd2.toc)
+(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/RtmpUEeIW2/Rd2pdf9d93
+1dc53ee5/Rd2.toc)
 \tf@toc=\write5
 \openout5 = `Rd2.toc'.
 
@@ -474,8 +474,8 @@ ltitude
  []
 
 [5]
-(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/RtmpwOh5Q5/Rd2pdf8845
-31afc160/Rd2.ind [6]
+(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/RtmpUEeIW2/Rd2pdf9d93
+1dc53ee5/Rd2.ind [6]
 
 LaTeX Font Warning: Font shape `T1/zi4/m/it' undefined
 (Font)              using `T1/zi4/m/n' instead on input line 11.
@@ -484,8 +484,8 @@ LaTeX Font Warning: Font shape `T1/zi4/m/it' undefined
 
 
 ])
-(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/RtmpwOh5Q5/Rd2pdf8845
-31afc160/Rd2.aux)
+(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/RtmpUEeIW2/Rd2pdf9d93
+1dc53ee5/Rd2.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -499,17 +499,17 @@ Here is how much of TeX's memory you used:
  30581 multiletter control sequences out of 15000+600000
  546154 words of font info for 75 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 92i,5n,92p,736b,618s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 92i,5n,92p,736b,620s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/inconsolata/Inconsolat
 a-zi4r.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/c
 msy10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/times/utmb8a.pfb>
 </usr/local/texlive/2023/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/loca
 l/texlive/2023/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/
 2023/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Rd2.pdf (7 pages, 99843 bytes).
+Output written on Rd2.pdf (7 pages, 99286 bytes).
 PDF statistics:
- 141 PDF objects out of 1000 (max. 8388607)
- 118 compressed objects within 2 object streams
+ 139 PDF objects out of 1000 (max. 8388607)
+ 116 compressed objects within 2 object streams
  33 named destinations out of 1000 (max. 500000)
  33 words of extra memory for PDF output out of 10000 (max. 10000000)
 

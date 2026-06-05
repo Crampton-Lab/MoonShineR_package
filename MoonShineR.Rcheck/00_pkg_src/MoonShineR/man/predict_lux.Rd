@@ -45,9 +45,9 @@ predict_lux(
 \itemize{
 \item predict_lux() predicts moonlight, sunlight, and/or twilight ground illumination (in lux) for any defined geographical location and time period. It creates a data.frame output and automatically plot to the console. Automatic export of the table (.csv) is optional.
 \item The presence of lunar eclipse during the simulated period is also reported as a console message. The illuminance reduction during lunar eclipse is not modeled.
-\item To create a moonlight or sunlight LED schedule for light re-creation using MoonShineP, user need to download the R script version of the MoonShineR: Moonlight scheduler or MoonShineR: Sunlight/twilight scheduler from GitHub repository: \url{https://github.com/Crampton-Lab/MoonShine}
+\item To create a moonlight or sunlight LED schedule for light re-creation using MoonShineP, user need to download the R script version of the MoonShineR: Moonlight scheduler or MoonShineR: Sunlight/twilight scheduler from GitHub repository: see \url{https://github.com/Crampton-Lab/MoonShine}
 \item The R script version also have other simulation features, such as simulating the blocking of direct moonlight from horizon obstructions (e.g., tree line or ridgeline), and attenuation by random passing clouds.
-\item To learn more about MoonShineR, see instruction manual: \url{https://lokpoon.github.io/moonshine_manual/overview.html}
+\item To learn more about MoonShineR, see \url{https://lokpoon.github.io/software/}
 }
 }
 \section{Columns found in the output data.frame/.csv table:}{
@@ -91,14 +91,14 @@ moonlight_output #return completed data frame
 \references{
 \itemize{
 \item Allen, C. W. (1976). Astrophysical quantities. Athelone Press.
-\item Austin, R. H., Phillips, B. F., & Webb, D. J. (1976). A method for calculating moonlight illuminance at the earth’s surface. The Journal of Applied Ecology, 13(3), 741.
-\item Buratti, B. J., Hillier, J. K., & Wang, M. (1996). The lunar opposition surge: Observations by clementine. Icarus, 124(2), 490–499.
-\item Hänel, A., Posch, T., Ribas, S. J., Aubé, M., Duriscoe, D., Jechow, A., Kollath, Z., Lolkema, D. E., Moore, C., Schmidt, N., Spoelstra, H., Wuchterl, G., & Kyba, C. C. M. (2018). Measuring night sky brightness: Methods and challenges. Journal of Quantitative Spectroscopy and Radiative Transfer, 205, 278–290.
+\item Austin, R. H., Phillips, B. F., & Webb, D. J. (1976). A method for calculating moonlight illuminance at the earth's surface. The Journal of Applied Ecology, 13(3), 741.
+\item Buratti, B. J., Hillier, J. K., & Wang, M. (1996). The lunar opposition surge: Observations by clementine. Icarus, 124(2), 490-499.
+\item Hanel, A., Posch, T., Ribas, S. J., Aube, M., Duriscoe, D., Jechow, A., Kollath, Z., Lolkema, D. E., Moore, C., Schmidt, N., Spoelstra, H., Wuchterl, G., & Kyba, C. C. M. (2018). Measuring night sky brightness: Methods and challenges. Journal of Quantitative Spectroscopy and Radiative Transfer, 205, 278-290.
 \item Krisciunas, K., & Schaefer, B. E. (1991). A model of the brightness of moonlight. Publications of the Astronomical Society of the Pacific, 103, 1033.
-\item Laue, E. G. (1970). The measurement of solar spectral irradiance at different terrestrial elevations. Solar Energy, 13(1), 43–57.
+\item Laue, E. G. (1970). The measurement of solar spectral irradiance at different terrestrial elevations. Solar Energy, 13(1), 43-57.
 \item Schaefer, B. E. (1990). Telescopic limiting magnitudes. Publications of the Astronomical Society of the Pacific, 102, 212.
 \item Seidelmann, P. K., United States Naval Observatory, & Great Britain (Eds.). (1992). Explanatory supplement to the Astronomical almanac (Rev. ed.). University Science Books.
-\item Stocker, B. D., Wang, H., Smith, N. G., Harrison, S. P., Keenan, T. F., Sandoval, D., Davis, T., & Prentice, I. C. (2020). P-model v1.0: An optimality-based light use efficiency model for simulating ecosystem gross primary production. Geoscientific Model Development, 13(3), 1545–1581.
+\item Stocker, B. D., Wang, H., Smith, N. G., Harrison, S. P., Keenan, T. F., Sandoval, D., Davis, T., & Prentice, I. C. (2020). P-model v1.0: An optimality-based light use efficiency model for simulating ecosystem gross primary production. Geoscientific Model Development, 13(3), 1545-1581.
 \item Thieurmel, B., & Elmarhraoui, A. (2022). suncalc: Compute sun position, sunlight phases, moon position and lunar phase. R package version 0.5.1. \url{https://CRAN.R-project.org/package=suncalc}
 }
 }

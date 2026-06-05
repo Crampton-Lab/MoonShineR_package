@@ -107,8 +107,8 @@ ltitude
 [5]
 No file Rd2.ind.
 [6]
-(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/RtmpwOh5Q5/Rd2pdf8845
-31afc160/Rd2.aux)
+(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/RtmpUEeIW2/Rd2pdf9d93
+1dc53ee5/Rd2.aux)
 
 Package rerunfilecheck Warning: File `Rd2.out' has changed.
 (rerunfilecheck)                Rerun to get outlines right
@@ -121,7 +121,7 @@ e/2023/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2023/tex
 mf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2023/texmf-dist/fo
 nts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/
 urw/times/utmri8a.pfb>
-Output written on Rd2.pdf (6 pages, 89747 bytes).
+Output written on Rd2.pdf (6 pages, 89276 bytes).
 Transcript written on Rd2.log.
 This is makeindex, version 2.17 [TeX Live 2023] (kpathsea + Thai support).
 Scanning input file Rd2.idx....done (7 entries accepted, 0 rejected).
@@ -197,22 +197,22 @@ ty (/usr/local/texlive/2023/texmf-dist/tex/latex/kvoptions/kvoptions.sty)))
 Writing index file Rd2.idx
 (/usr/local/texlive/2023/texmf-dist/tex/latex/psnfss/t1ptm.fd)
 (/usr/local/texlive/2023/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def)
-(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/RtmpwOh5Q5/Rd2pdf8845
-31afc160/Rd2.aux)
+(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/RtmpUEeIW2/Rd2pdf9d93
+1dc53ee5/Rd2.aux)
 (/usr/local/texlive/2023/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 )
-(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/RtmpwOh5Q5/Rd2pdf8845
-31afc160/Rd2.out)
-(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/RtmpwOh5Q5/Rd2pdf8845
-31afc160/Rd2.out)
+(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/RtmpUEeIW2/Rd2pdf9d93
+1dc53ee5/Rd2.out)
+(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/RtmpUEeIW2/Rd2pdf9d93
+1dc53ee5/Rd2.out)
 (/usr/local/texlive/2023/texmf-dist/tex/latex/psnfss/ts1ptm.fd)
 (/usr/local/texlive/2023/texmf-dist/tex/latex/inconsolata/t1zi4.fd)
 (/usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsa.fd)
 (/usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsb.fd)
 (/usr/local/texlive/2023/texmf-dist/tex/latex/jknapltx/ursfs.fd)
-(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/RtmpwOh5Q5/Rd2pdf8845
-31afc160/Rd2.toc) [1{/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/
+(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/RtmpUEeIW2/Rd2pdf9d93
+1dc53ee5/Rd2.toc) [1{/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/
 pdftex.map}{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc}{/us
 r/local/texlive/2023/texmf-dist/fonts/enc/dvips/inconsolata/i4-t1-0.enc}]
 [2]
@@ -239,15 +239,15 @@ Overfull \hbox (6.95798pt too wide) in paragraph at lines 214--215
  il-lu-mi-nance of sun-light (de-fined as the light when []\T1/zi4/m/n/10 sun_a
 ltitude
 [5]
-(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/RtmpwOh5Q5/Rd2pdf8845
-31afc160/Rd2.ind [6]
+(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/RtmpUEeIW2/Rd2pdf9d93
+1dc53ee5/Rd2.ind [6]
 
 LaTeX Font Warning: Font shape `T1/zi4/m/it' undefined
 (Font)              using `T1/zi4/m/n' instead on input line 11.
 
 [7])
-(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/RtmpwOh5Q5/Rd2pdf8845
-31afc160/Rd2.aux)
+(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/RtmpUEeIW2/Rd2pdf9d93
+1dc53ee5/Rd2.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -264,7 +264,7 @@ e/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive
 f-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2023/texmf-dist/fon
 ts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/u
 rw/times/utmri8a.pfb>
-Output written on Rd2.pdf (7 pages, 99607 bytes).
+Output written on Rd2.pdf (7 pages, 99125 bytes).
 Transcript written on Rd2.log.
 This is makeindex, version 2.17 [TeX Live 2023] (kpathsea + Thai support).
 Scanning input file Rd2.idx....done (7 entries accepted, 0 rejected).
@@ -340,22 +340,22 @@ ty (/usr/local/texlive/2023/texmf-dist/tex/latex/kvoptions/kvoptions.sty)))
 Writing index file Rd2.idx
 (/usr/local/texlive/2023/texmf-dist/tex/latex/psnfss/t1ptm.fd)
 (/usr/local/texlive/2023/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def)
-(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/RtmpwOh5Q5/Rd2pdf8845
-31afc160/Rd2.aux)
+(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/RtmpUEeIW2/Rd2pdf9d93
+1dc53ee5/Rd2.aux)
 (/usr/local/texlive/2023/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 )
-(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/RtmpwOh5Q5/Rd2pdf8845
-31afc160/Rd2.out)
-(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/RtmpwOh5Q5/Rd2pdf8845
-31afc160/Rd2.out)
+(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/RtmpUEeIW2/Rd2pdf9d93
+1dc53ee5/Rd2.out)
+(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/RtmpUEeIW2/Rd2pdf9d93
+1dc53ee5/Rd2.out)
 (/usr/local/texlive/2023/texmf-dist/tex/latex/psnfss/ts1ptm.fd)
 (/usr/local/texlive/2023/texmf-dist/tex/latex/inconsolata/t1zi4.fd)
 (/usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsa.fd)
 (/usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsb.fd)
 (/usr/local/texlive/2023/texmf-dist/tex/latex/jknapltx/ursfs.fd)
-(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/RtmpwOh5Q5/Rd2pdf8845
-31afc160/Rd2.toc) [1{/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/
+(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/RtmpUEeIW2/Rd2pdf9d93
+1dc53ee5/Rd2.toc) [1{/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/
 pdftex.map}{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc}{/us
 r/local/texlive/2023/texmf-dist/fonts/enc/dvips/inconsolata/i4-t1-0.enc}]
 [2]
@@ -382,15 +382,15 @@ Overfull \hbox (6.95798pt too wide) in paragraph at lines 214--215
  il-lu-mi-nance of sun-light (de-fined as the light when []\T1/zi4/m/n/10 sun_a
 ltitude
 [5]
-(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/RtmpwOh5Q5/Rd2pdf8845
-31afc160/Rd2.ind [6]
+(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/RtmpUEeIW2/Rd2pdf9d93
+1dc53ee5/Rd2.ind [6]
 
 LaTeX Font Warning: Font shape `T1/zi4/m/it' undefined
 (Font)              using `T1/zi4/m/n' instead on input line 11.
 
 [7])
-(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/RtmpwOh5Q5/Rd2pdf8845
-31afc160/Rd2.aux)
+(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/RtmpUEeIW2/Rd2pdf9d93
+1dc53ee5/Rd2.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -402,8 +402,8 @@ e/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive
 f-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2023/texmf-dist/fon
 ts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/u
 rw/times/utmri8a.pfb>
-Output written on Rd2.pdf (7 pages, 99843 bytes).
+Output written on Rd2.pdf (7 pages, 99286 bytes).
 Transcript written on Rd2.log.
 Saving output to ‘MoonShineR-manual.pdf’ ...
 Done
-You may want to clean up by 'rm -Rf /var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T//RtmpwOh5Q5/Rd2pdf884531afc160'
+You may want to clean up by 'rm -Rf /var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T//RtmpUEeIW2/Rd2pdf9d931dc53ee5'

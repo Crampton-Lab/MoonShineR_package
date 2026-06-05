@@ -10,17 +10,10 @@
 * checking for file ‘MoonShineR/DESCRIPTION’ ... OK
 * this is package ‘MoonShineR’ version ‘1.1.0’
 * package encoding: UTF-8
-* checking CRAN incoming feasibility ... [2s/18s] NOTE
+* checking CRAN incoming feasibility ... [3s/16s] NOTE
 Maintainer: ‘Lok Poon <poonchiulok@gmail.com>’
 
 New submission
-
-Found the following (possibly) invalid URLs:
-  URL: https://lokpoon.github.io/moonshine_manual/overview.html
-    From: man/plot_lux.Rd
-          man/predict_lux.Rd
-    Status: 404
-    Message: Not Found
 * checking package namespace information ... OK
 * checking package dependencies ... OK
 * checking if this is a source package ... OK
@@ -82,25 +75,13 @@ plot_lux.html:17:1 (plot_lux.Rd:5): Warning: <table> lacks "summary" attribute
 plot_lux.html:52:1 (plot_lux.Rd:20): Warning: <table> lacks "summary" attribute
 predict_lux.html:15:44 (predict_lux.Rd:5): Error: <main> is not recognized!
 predict_lux.html:15:44 (predict_lux.Rd:5): Warning: discarding unexpected <main>
-predict_lux.html:183:133 (predict_lux.Rd:94): Warning: replacing invalid character code 128
-predict_lux.html:183:134 (predict_lux.Rd:94): Warning: replacing invalid character code 153
-predict_lux.html:186:146 (predict_lux.Rd:95): Warning: replacing invalid character code 128
-predict_lux.html:186:147 (predict_lux.Rd:95): Warning: replacing invalid character code 147
-predict_lux.html:189:326 (predict_lux.Rd:96): Warning: replacing invalid character code 128
-predict_lux.html:189:327 (predict_lux.Rd:96): Warning: replacing invalid character code 147
-predict_lux.html:195:141 (predict_lux.Rd:98): Warning: replacing invalid character code 128
-predict_lux.html:195:142 (predict_lux.Rd:98): Warning: replacing invalid character code 147
-predict_lux.html:204:299 (predict_lux.Rd:101): Warning: replacing invalid character code 128
-predict_lux.html:204:300 (predict_lux.Rd:101): Warning: replacing invalid character code 147
 predict_lux.html:226:1 (predict_lux.Rd:89): Warning: discarding unexpected </main>
 predict_lux.html:4:1 (predict_lux.Rd:5): Warning: <link> inserting "type" attribute
 predict_lux.html:12:1 (predict_lux.Rd:5): Warning: <script> proprietary attribute "onload"
 predict_lux.html:12:1 (predict_lux.Rd:5): Warning: <script> inserting "type" attribute
 predict_lux.html:17:1 (predict_lux.Rd:5): Warning: <table> lacks "summary" attribute
 predict_lux.html:63:1 (predict_lux.Rd:22): Warning: <table> lacks "summary" attribute
-* checking for non-standard things in the check directory ... NOTE
-Found the following files/directories:
-  ‘.DS_Store’
+* checking for non-standard things in the check directory ... OK
 * checking for detritus in the temp directory ... OK
 * DONE
-Status: 4 NOTEs
+Status: 3 NOTEs
