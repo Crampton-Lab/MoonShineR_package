@@ -1,6 +1,6 @@
 #' MoonShineR Package
 #'
-#' Predict and plot natural light intensity from moonlight, sunlight, and twilight.
+#' Predict and plot light levels (ground illuminance) from moonlight, sunlight, and twilight.
 #'
 #' @keywords internal
 "_PACKAGE"

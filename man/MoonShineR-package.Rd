@@ -6,7 +6,7 @@
 \alias{MoonShineR-package}
 \title{MoonShineR Package}
 \description{
-Predict and plot natural light intensity from moonlight, sunlight, and twilight.
+Predict and plot light levels (ground illuminance) from moonlight, sunlight, and twilight.
 }
 \author{
 \strong{Maintainer}: Lok Poon \email{poonchiulok@gmail.com} (\href{https://orcid.org/0000-0003-3547-1614}{ORCID})

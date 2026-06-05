@@ -8,7 +8,7 @@
 #' @param latitude `numeric`. Latitude in decimal degrees (e.g., `-4.21528`).
 #' @param longitude `numeric`. Longitude in decimal degrees (e.g., `-69.94056`).
 #' @param site_elev `numeric`. Site elevation in meters (e.g., `0` is sea level). Default is `0`. Elevation correction only applies to moonlight but not sunlight and twilight. Site elevation of a coordinate location can be obtained from <https://www.dcode.fr/earth-elevation>.
-#' @param time_zone `character`. Time zone for the location set (e.g., `"EST"). Remember to change time_zone to correspond it to the location set. For a list of time zone names, enter `OlsonNames(tzdir = NULL)` in R console. Use a time zone without DST to avoid confusion (e.g., use `"EST"` instead of `"America/New_York"`).
+#' @param time_zone `character`. Time zone for the location set (e.g., `"EST"`). Remember to change time_zone to correspond it to the location set. For a list of time zone names, enter `OlsonNames(tzdir = NULL)` in R console. Use a time zone without DST to avoid confusion (e.g., use `"EST"` instead of `"America/New_York"`).
 #' @param date_start `character`. Starting date of the simulation (`"YYYY-MM-DD"`).
 #' @param time_start `character`. Starting time of the simulation (`"hh:mm:ss"`). Default is `"00:00:00"`.
 #' @param duration_day `numeric`. Duration of the simulation in days.
