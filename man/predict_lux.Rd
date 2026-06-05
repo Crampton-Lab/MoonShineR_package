@@ -25,7 +25,7 @@ predict_lux(
 
 \item{site_elev}{\code{numeric}. Site elevation in meters (e.g., \code{0} is sea level). Default is \code{0}. Elevation correction only applies to moonlight but not sunlight and twilight. Site elevation of a coordinate location can be obtained from \url{https://www.dcode.fr/earth-elevation}.}
 
-\item{time_zone}{\code{character}. Time zone for the location set (e.g., \verb{"EST"). Remember to change time_zone to correspond it to the location set. For a list of time zone names, enter }OlsonNames(tzdir = NULL)\verb{in R console. Use a time zone without DST to avoid confusion (e.g., use}"EST"\verb{instead of}"America/New_York"`).}
+\item{time_zone}{\code{character}. Time zone for the location set (e.g., \code{"EST"}). Remember to change time_zone to correspond it to the location set. For a list of time zone names, enter \code{OlsonNames(tzdir = NULL)} in R console. Use a time zone without DST to avoid confusion (e.g., use \code{"EST"} instead of \code{"America/New_York"}).}
 
 \item{date_start}{\code{character}. Starting date of the simulation (\code{"YYYY-MM-DD"}).}
 
