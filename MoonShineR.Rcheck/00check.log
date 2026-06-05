@@ -1,0 +1,106 @@
+* using log directory ‘/Users/lokpoon/Desktop/programming repo/MoonShineR/MoonShineR.Rcheck’
+* using R version 4.4.2 (2024-10-31)
+* using platform: aarch64-apple-darwin20
+* R was compiled by
+    Apple clang version 14.0.0 (clang-1400.0.29.202)
+    GNU Fortran (GCC) 12.2.0
+* running under: macOS Sequoia 15.7.7
+* using session charset: UTF-8
+* using option ‘--as-cran’
+* checking for file ‘MoonShineR/DESCRIPTION’ ... OK
+* this is package ‘MoonShineR’ version ‘1.1.0’
+* package encoding: UTF-8
+* checking CRAN incoming feasibility ... [2s/18s] NOTE
+Maintainer: ‘Lok Poon <poonchiulok@gmail.com>’
+
+New submission
+
+Found the following (possibly) invalid URLs:
+  URL: https://lokpoon.github.io/moonshine_manual/overview.html
+    From: man/plot_lux.Rd
+          man/predict_lux.Rd
+    Status: 404
+    Message: Not Found
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘MoonShineR’ can be installed ... OK
+* checking installed package size ... OK
+* checking package directory ... OK
+* checking for future file timestamps ... NOTE
+unable to verify current time
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking code files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking use of S3 registration ... OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... OK
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd line widths ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking examples ... OK
+* checking PDF version of manual ... OK
+* checking HTML version of manual ... NOTE
+Found the following HTML validation problems:
+MoonShineR-package.html:15:44 (MoonShineR-package.Rd:7): Error: <main> is not recognized!
+MoonShineR-package.html:15:44 (MoonShineR-package.Rd:7): Warning: discarding unexpected <main>
+MoonShineR-package.html:32:1 (MoonShineR-package.Rd:13): Warning: discarding unexpected </main>
+MoonShineR-package.html:4:1 (MoonShineR-package.Rd:7): Warning: <link> inserting "type" attribute
+MoonShineR-package.html:12:1 (MoonShineR-package.Rd:7): Warning: <script> proprietary attribute "onload"
+MoonShineR-package.html:12:1 (MoonShineR-package.Rd:7): Warning: <script> inserting "type" attribute
+MoonShineR-package.html:17:1 (MoonShineR-package.Rd:7): Warning: <table> lacks "summary" attribute
+plot_lux.html:15:44 (plot_lux.Rd:5): Error: <main> is not recognized!
+plot_lux.html:15:44 (plot_lux.Rd:5): Warning: discarding unexpected <main>
+plot_lux.html:159:1 (plot_lux.Rd:79): Warning: discarding unexpected </main>
+plot_lux.html:4:1 (plot_lux.Rd:5): Warning: <link> inserting "type" attribute
+plot_lux.html:12:1 (plot_lux.Rd:5): Warning: <script> proprietary attribute "onload"
+plot_lux.html:12:1 (plot_lux.Rd:5): Warning: <script> inserting "type" attribute
+plot_lux.html:17:1 (plot_lux.Rd:5): Warning: <table> lacks "summary" attribute
+plot_lux.html:52:1 (plot_lux.Rd:20): Warning: <table> lacks "summary" attribute
+predict_lux.html:15:44 (predict_lux.Rd:5): Error: <main> is not recognized!
+predict_lux.html:15:44 (predict_lux.Rd:5): Warning: discarding unexpected <main>
+predict_lux.html:183:133 (predict_lux.Rd:94): Warning: replacing invalid character code 128
+predict_lux.html:183:134 (predict_lux.Rd:94): Warning: replacing invalid character code 153
+predict_lux.html:186:146 (predict_lux.Rd:95): Warning: replacing invalid character code 128
+predict_lux.html:186:147 (predict_lux.Rd:95): Warning: replacing invalid character code 147
+predict_lux.html:189:326 (predict_lux.Rd:96): Warning: replacing invalid character code 128
+predict_lux.html:189:327 (predict_lux.Rd:96): Warning: replacing invalid character code 147
+predict_lux.html:195:141 (predict_lux.Rd:98): Warning: replacing invalid character code 128
+predict_lux.html:195:142 (predict_lux.Rd:98): Warning: replacing invalid character code 147
+predict_lux.html:204:299 (predict_lux.Rd:101): Warning: replacing invalid character code 128
+predict_lux.html:204:300 (predict_lux.Rd:101): Warning: replacing invalid character code 147
+predict_lux.html:226:1 (predict_lux.Rd:89): Warning: discarding unexpected </main>
+predict_lux.html:4:1 (predict_lux.Rd:5): Warning: <link> inserting "type" attribute
+predict_lux.html:12:1 (predict_lux.Rd:5): Warning: <script> proprietary attribute "onload"
+predict_lux.html:12:1 (predict_lux.Rd:5): Warning: <script> inserting "type" attribute
+predict_lux.html:17:1 (predict_lux.Rd:5): Warning: <table> lacks "summary" attribute
+predict_lux.html:63:1 (predict_lux.Rd:22): Warning: <table> lacks "summary" attribute
+* checking for non-standard things in the check directory ... NOTE
+Found the following files/directories:
+  ‘.DS_Store’
+* checking for detritus in the temp directory ... OK
+* DONE
+Status: 4 NOTEs
