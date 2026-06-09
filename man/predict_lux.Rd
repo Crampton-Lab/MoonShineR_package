@@ -15,7 +15,8 @@ predict_lux(
   time_interval_minutes = 5,
   darksky_value = 8e-04,
   output_directory = NULL,
-  export_table = FALSE
+  export_table = FALSE,
+  show_progress = TRUE
 )
 }
 \arguments{
@@ -40,6 +41,14 @@ predict_lux(
 \item{output_directory}{\code{character}. Directory to save the output table (.csv) and plot (.pdf). Ignore output_directory if the export options are turned OFF (i.e., \code{export_table = FALSE}).}
 
 \item{export_table}{\code{logical}. \code{TRUE} to export output .csv table to the output_directory. \code{FALSE} to disable. Default is \code{FALSE}.}
+
+\item{show_progress}{\code{logical}. \code{TRUE} to show a progress bar. \code{FALSE} to disable. Default is \code{TRUE}.}
+}
+\value{
+A data frame containing predicted ground illuminance values for each time step, based on different combinations of moonlight, sunlight, and twilight.
+Other columns include astronomical values: lunar phase angle (phase_angle), moon illuminated fraction (fraction),
+moon angular distance from zenith (Z_moon), moon distance from Earth in km (distance), sun angular altitude (sun_altitude),
+and whether a lunar eclipse is occurring (eclipse).
 }
 \description{
 \itemize{
@@ -84,7 +93,7 @@ predict_lux(
 moonlight_output <- predict_lux(latitude = -4.21528, longitude = -69.94056, site_elev = 0,
                     time_zone = "EST", date_start = "2023-02-27", time_start = "18:00:00",
                     duration_day = 2, time_interval_minutes = 15, darksky_value = 0.0008,
-                    output_directory = NULL, export_table = FALSE)
+                    output_directory = NULL, export_table = FALSE, show_progress = TRUE)
 
 moonlight_output #return completed data frame
 }
