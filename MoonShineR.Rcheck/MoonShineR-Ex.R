@@ -69,7 +69,7 @@ base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 moonlight_output <- predict_lux(latitude = -4.21528, longitude = -69.94056, site_elev = 0,
                     time_zone = "EST", date_start = "2023-02-27", time_start = "18:00:00",
                     duration_day = 2, time_interval_minutes = 15, darksky_value = 0.0008,
-                    output_directory = NULL, export_table = FALSE)
+                    output_directory = NULL, export_table = FALSE, show_progress = TRUE)
 
 moonlight_output #return completed data frame
 

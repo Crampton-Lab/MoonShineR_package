@@ -29,6 +29,11 @@
 #' @keywords moonlight
 #' @import magrittr
 #' @export
+#' @return A ggplot object showing predicted ground illuminance through time.
+#'   The type of illuminance plotted, corresponding to a specific combination of moonlight, sunlight, and twilight,
+#'   depends on the illuminance_type_plot argument in the plot_lux() function
+#'   and corresponds to one of the illuminance columns in the data frame produced
+#'   by `predict_lux()`.
 #' @examples
 #' # Plot a predict_lux generated dataframe named moonlight_output
 #'

@@ -46,9 +46,7 @@ predict_lux(
 }
 \value{
 A data frame containing predicted ground illuminance values for each time step, based on different combinations of moonlight, sunlight, and twilight.
-Other columns include astronomical values: lunar phase angle (phase_angle), moon illuminated fraction (fraction),
-moon angular distance from zenith (Z_moon), moon distance from Earth in km (distance), sun angular altitude (sun_altitude),
-and whether a lunar eclipse is occurring (eclipse).
+Other columns include various astronomical values.
 }
 \description{
 \itemize{

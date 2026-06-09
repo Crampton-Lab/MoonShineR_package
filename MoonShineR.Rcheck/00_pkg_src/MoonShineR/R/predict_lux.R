@@ -16,6 +16,7 @@
 #' @param darksky_value `numeric`. A baseline illuminance (in lux) added to the model to represent other constant nocturnal light sources (e.g., starlight and airglow). Default is `0.0008`. Change it to zero if a completely dark sky is preferred.
 #' @param output_directory `character`. Directory to save the output table (.csv) and plot (.pdf). Ignore output_directory if the export options are turned OFF (i.e., `export_table = FALSE`).
 #' @param export_table `logical`. `TRUE` to export output .csv table to the output_directory. `FALSE` to disable. Default is `FALSE`.
+#' @param show_progress `logical`. `TRUE` to show a progress bar. `FALSE` to disable. Default is `TRUE`.
 #' @details
 #' # Columns found in the output data.frame/.csv table:
 #' * A series of astronomical and illuminance values are reported for every time stamp. In explanation,
@@ -50,6 +51,8 @@
 #' * Seidelmann, P. K., United States Naval Observatory, & Great Britain (Eds.). (1992). Explanatory supplement to the Astronomical almanac (Rev. ed.). University Science Books.
 #' * Stocker, B. D., Wang, H., Smith, N. G., Harrison, S. P., Keenan, T. F., Sandoval, D., Davis, T., & Prentice, I. C. (2020). P-model v1.0: An optimality-based light use efficiency model for simulating ecosystem gross primary production. Geoscientific Model Development, 13(3), 1545-1581.
 #' * Thieurmel, B., & Elmarhraoui, A. (2022). suncalc: Compute sun position, sunlight phases, moon position and lunar phase. R package version 0.5.1. <https://CRAN.R-project.org/package=suncalc>
+#' @return A data frame containing predicted ground illuminance values for each time step, based on different combinations of moonlight, sunlight, and twilight.
+#'   Other columns include various astronomical values.
 #' @examples
 #' # Predict the nighttime moonlight illuminance in Leticia, Colombia,
 #' # for 14 days starting on 2023-02-27 at 6pm.
@@ -57,7 +60,7 @@
 #' moonlight_output <- predict_lux(latitude = -4.21528, longitude = -69.94056, site_elev = 0,
 #'                     time_zone = "EST", date_start = "2023-02-27", time_start = "18:00:00",
 #'                     duration_day = 2, time_interval_minutes = 15, darksky_value = 0.0008,
-#'                     output_directory = NULL, export_table = FALSE)
+#'                     output_directory = NULL, export_table = FALSE, show_progress = TRUE)
 #'
 #' moonlight_output #return completed data frame
 
@@ -66,7 +69,7 @@
 
 predict_lux <- function(latitude = NULL, longitude = NULL, site_elev = 0, time_zone = NULL, date_start = NULL, time_start = "00:00:00",
                         duration_day = NULL, time_interval_minutes = 5, darksky_value = 0.0008,
-                        output_directory = NULL, export_table = FALSE) {
+                        output_directory = NULL, export_table = FALSE, show_progress = TRUE) {
 
 
 
@@ -134,7 +137,7 @@ predict_lux <- function(latitude = NULL, longitude = NULL, site_elev = 0, time_z
     moon_value_table[i, "distance"] <- suncalc::getMoonPosition(date = date_time_start + (i - 1) * time_interval_minutes * 60, lat = latitude, lon = longitude)[1, "distance"] # distance = moon/Earth distance in km
     moon_value_table[i, "sun_altitude"] <- REdaS::rad2deg(suncalc::getSunlightPosition(date = date_time_start + (i - 1) * time_interval_minutes * 60, lat = latitude, lon = longitude, keep = c("altitude"))[1, "altitude"]) # sun_altitude = altitude of the sun in degree
     #pb$tick() # Update the progress bar
-    pb$tick()
+    if(show_progress == TRUE) {pb$tick()}
   }
   moon_value_table <- subset(moon_value_table, select = -c(x))
 
@@ -236,11 +239,11 @@ predict_lux <- function(latitude = NULL, longitude = NULL, site_elev = 0, time_z
 
   # Check if any eclipse occurs and print a message accordingly
   if (any(eclipse_condition)) {
-    print("The calculation is completed. ECLIPSE IN SIMULATION!!!")
+    message("Calculation completed. ECLIPSE IN THE SIMULATION PERIOD!")
     # You can still use 'which' to index the rows where eclipse occurs if you need
     moon_value_table[which(eclipse_condition == TRUE),]
   } else {
-    print("The calculation is completed. No eclipse in simulation")
+    message("Calculation completed. No lunar eclipse in the simulation period.")
   }
 
   #---------------------------END OF ILLUMINATION COMPUTATION--------------------
@@ -255,23 +258,6 @@ predict_lux <- function(latitude = NULL, longitude = NULL, site_elev = 0, time_z
   }
 
   return(moon_value_table)
-
-
-  #---------------------------Lunar eclipse warning---------------------------
-
-  # # MoonShineR warns the user if an eclipse occurs during a simulation, and it reports the start and end time of the simulation.
-  # # However, MoonShineR does not simulate the reduction in moon ground illuminance associated with the eclipse.
-  #
-  # if (any(abs(moon_value_table$phase_angle) < 1.5 & moon_value_table$sun_altitude < 0)) { # eclipse defined as a moon with phase angle < 1.5 during nighttime
-  #   print("The calculation is completed. ECLIPSE IN SIMULATION!!!")
-  #   eclipse_list <- (abs(moon_value_table$phase_angle) < 1.5 & moon_value_table$sun_altitude < 0)
-  #   moon_value_table[which(eclipse_list == TRUE),]
-  # } else {
-  #   print("The calculation is completed. No eclipse in simulation")
-  # }
-  #
-  # # Return table
-  # return(moon_value_table)
 
   #---------------------------END OF SCRIPT---------------------------
 }

@@ -57,7 +57,7 @@ Type 'q()' to quit R.
 +                     time_zone = "EST", date_start = "2023-02-27", time_start = "18:00:00",
 +                     duration_day = 10.5, time_interval_minutes = 30, darksky_value = 0.0008,
 +                     output_directory = NULL, export_table = FALSE)
-[1] "The calculation is completed. No eclipse in simulation"
+Calculation completed. No lunar eclipse in the simulation period.
 > 
 > # Proceed to plotting
 > plot_lux(df = moonlight_output, illuminance_type_plot = "total_illuminance_all",
@@ -91,8 +91,8 @@ Warning: Removed 2 rows containing missing values or values outside the scale ra
 > moonlight_output <- predict_lux(latitude = -4.21528, longitude = -69.94056, site_elev = 0,
 +                     time_zone = "EST", date_start = "2023-02-27", time_start = "18:00:00",
 +                     duration_day = 2, time_interval_minutes = 15, darksky_value = 0.0008,
-+                     output_directory = NULL, export_table = FALSE)
-[1] "The calculation is completed. No eclipse in simulation"
++                     output_directory = NULL, export_table = FALSE, show_progress = TRUE)
+Calculation completed. No lunar eclipse in the simulation period.
 > 
 > moonlight_output #return completed data frame
                datetime phase_angle  fraction   Z_moon distance sun_altitude
@@ -877,7 +877,7 @@ Warning: Removed 2 rows containing missing values or values outside the scale ra
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  1.557 0.053 1.616 0 0 
+Time elapsed:  1.602 0.045 1.651 0 0 
 > grDevices::dev.off()
 null device 
           1 

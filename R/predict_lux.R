@@ -52,9 +52,7 @@
 #' * Stocker, B. D., Wang, H., Smith, N. G., Harrison, S. P., Keenan, T. F., Sandoval, D., Davis, T., & Prentice, I. C. (2020). P-model v1.0: An optimality-based light use efficiency model for simulating ecosystem gross primary production. Geoscientific Model Development, 13(3), 1545-1581.
 #' * Thieurmel, B., & Elmarhraoui, A. (2022). suncalc: Compute sun position, sunlight phases, moon position and lunar phase. R package version 0.5.1. <https://CRAN.R-project.org/package=suncalc>
 #' @return A data frame containing predicted ground illuminance values for each time step, based on different combinations of moonlight, sunlight, and twilight.
-#'   Other columns include astronomical values: lunar phase angle (phase_angle), moon illuminated fraction (fraction),
-#'   moon angular distance from zenith (Z_moon), moon distance from Earth in km (distance), sun angular altitude (sun_altitude),
-#'   and whether a lunar eclipse is occurring (eclipse).
+#'   Other columns include various astronomical values.
 #' @examples
 #' # Predict the nighttime moonlight illuminance in Leticia, Colombia,
 #' # for 14 days starting on 2023-02-27 at 6pm.

@@ -10,7 +10,7 @@
 * checking for file ‘MoonShineR/DESCRIPTION’ ... OK
 * this is package ‘MoonShineR’ version ‘1.1.0’
 * package encoding: UTF-8
-* checking CRAN incoming feasibility ... [3s/16s] NOTE
+* checking CRAN incoming feasibility ... [2s/17s] NOTE
 Maintainer: ‘Lok Poon <poonchiulok@gmail.com>’
 
 New submission
@@ -67,7 +67,7 @@ MoonShineR-package.html:12:1 (MoonShineR-package.Rd:7): Warning: <script> insert
 MoonShineR-package.html:17:1 (MoonShineR-package.Rd:7): Warning: <table> lacks "summary" attribute
 plot_lux.html:15:44 (plot_lux.Rd:5): Error: <main> is not recognized!
 plot_lux.html:15:44 (plot_lux.Rd:5): Warning: discarding unexpected <main>
-plot_lux.html:159:1 (plot_lux.Rd:79): Warning: discarding unexpected </main>
+plot_lux.html:169:1 (plot_lux.Rd:86): Warning: discarding unexpected </main>
 plot_lux.html:4:1 (plot_lux.Rd:5): Warning: <link> inserting "type" attribute
 plot_lux.html:12:1 (plot_lux.Rd:5): Warning: <script> proprietary attribute "onload"
 plot_lux.html:12:1 (plot_lux.Rd:5): Warning: <script> inserting "type" attribute
@@ -75,13 +75,15 @@ plot_lux.html:17:1 (plot_lux.Rd:5): Warning: <table> lacks "summary" attribute
 plot_lux.html:52:1 (plot_lux.Rd:20): Warning: <table> lacks "summary" attribute
 predict_lux.html:15:44 (predict_lux.Rd:5): Error: <main> is not recognized!
 predict_lux.html:15:44 (predict_lux.Rd:5): Warning: discarding unexpected <main>
-predict_lux.html:226:1 (predict_lux.Rd:89): Warning: discarding unexpected </main>
+predict_lux.html:238:1 (predict_lux.Rd:96): Warning: discarding unexpected </main>
 predict_lux.html:4:1 (predict_lux.Rd:5): Warning: <link> inserting "type" attribute
 predict_lux.html:12:1 (predict_lux.Rd:5): Warning: <script> proprietary attribute "onload"
 predict_lux.html:12:1 (predict_lux.Rd:5): Warning: <script> inserting "type" attribute
 predict_lux.html:17:1 (predict_lux.Rd:5): Warning: <table> lacks "summary" attribute
-predict_lux.html:63:1 (predict_lux.Rd:22): Warning: <table> lacks "summary" attribute
-* checking for non-standard things in the check directory ... OK
+predict_lux.html:64:1 (predict_lux.Rd:23): Warning: <table> lacks "summary" attribute
+* checking for non-standard things in the check directory ... NOTE
+Found the following files/directories:
+  ‘.DS_Store’
 * checking for detritus in the temp directory ... OK
 * DONE
-Status: 3 NOTEs
+Status: 4 NOTEs
