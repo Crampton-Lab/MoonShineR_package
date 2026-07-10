@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.17)  9 JUN 2026 16:03
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.17)  9 JUN 2026 16:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -349,8 +349,8 @@ File: l3backend-pdftex.def 2023-01-16 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count290
 \l__pdf_internal_box=\box58
 )
-(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/RtmpUhUJ31/Rd2pdf6f71
-1b100447/Rd2.aux)
+(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/Rtmpdr3dmR/Rd2pdf7675
+66a33b72/Rd2.aux)
 \openout1 = `Rd2.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 8.
@@ -388,10 +388,10 @@ LaTeX Font Info:    ... okay on input line 8.
 )
 Package hyperref Info: Link coloring ON on input line 8.
 
-(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/RtmpUhUJ31/Rd2pdf6f71
-1b100447/Rd2.out)
-(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/RtmpUhUJ31/Rd2pdf6f71
-1b100447/Rd2.out)
+(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/Rtmpdr3dmR/Rd2pdf7675
+66a33b72/Rd2.out)
+(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/Rtmpdr3dmR/Rd2pdf7675
+66a33b72/Rd2.out)
 \@outlinefile=\write4
 \openout4 = `Rd2.out'.
 
@@ -427,8 +427,8 @@ LaTeX Font Info:    Trying to load font information for U+rsfs on input line 28
 (/usr/local/texlive/2023/texmf-dist/tex/latex/jknapltx/ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 )
-(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/RtmpUhUJ31/Rd2pdf6f71
-1b100447/Rd2.toc)
+(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/Rtmpdr3dmR/Rd2pdf7675
+66a33b72/Rd2.toc)
 \tf@toc=\write5
 \openout5 = `Rd2.toc'.
 
@@ -474,8 +474,8 @@ ltitude
  []
 
 [5]
-(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/RtmpUhUJ31/Rd2pdf6f71
-1b100447/Rd2.ind [6]
+(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/Rtmpdr3dmR/Rd2pdf7675
+66a33b72/Rd2.ind [6]
 
 LaTeX Font Warning: Font shape `T1/zi4/m/it' undefined
 (Font)              using `T1/zi4/m/n' instead on input line 11.
@@ -484,8 +484,8 @@ LaTeX Font Warning: Font shape `T1/zi4/m/it' undefined
 
 
 ])
-(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/RtmpUhUJ31/Rd2pdf6f71
-1b100447/Rd2.aux)
+(/private/var/folders/gm/ws5bs96n16929qb4t1ldhqpm0000gn/T/Rtmpdr3dmR/Rd2pdf7675
+66a33b72/Rd2.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 

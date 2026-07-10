@@ -10,7 +10,7 @@
 * checking for file ‘MoonShineR/DESCRIPTION’ ... OK
 * this is package ‘MoonShineR’ version ‘1.1.0’
 * package encoding: UTF-8
-* checking CRAN incoming feasibility ... [2s/17s] NOTE
+* checking CRAN incoming feasibility ... [3s/19s] NOTE
 Maintainer: ‘Lok Poon <poonchiulok@gmail.com>’
 
 New submission
@@ -81,9 +81,7 @@ predict_lux.html:12:1 (predict_lux.Rd:5): Warning: <script> proprietary attribut
 predict_lux.html:12:1 (predict_lux.Rd:5): Warning: <script> inserting "type" attribute
 predict_lux.html:17:1 (predict_lux.Rd:5): Warning: <table> lacks "summary" attribute
 predict_lux.html:64:1 (predict_lux.Rd:23): Warning: <table> lacks "summary" attribute
-* checking for non-standard things in the check directory ... NOTE
-Found the following files/directories:
-  ‘.DS_Store’
+* checking for non-standard things in the check directory ... OK
 * checking for detritus in the temp directory ... OK
 * DONE
-Status: 4 NOTEs
+Status: 3 NOTEs
