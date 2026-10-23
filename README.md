@@ -1,9 +1,9 @@
 # MoonShineR_package
-## Updated June 4, 2026
+## Updated Oct 23, 2026
 
 This site hosts the source code for the MoonShineR package.
 
-Published in CRAN repository as v1.1.0: https://cran.r-project.org/web/packages/MoonShineR/index.html
+Published in CRAN repository as v1.2.0: https://cran.r-project.org/web/packages/MoonShineR/index.html
 
 For further details, see MoonShine suite homepage: https://github.com/Crampton-Lab/MoonShine
 
