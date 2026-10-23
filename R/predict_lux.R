@@ -1,52 +1,53 @@
 #' Predict moonlight, sunlight, and twilight ground illuminance
 #'
-#' * predict_lux() predicts moonlight, sunlight, and/or twilight ground illumination (in lux) for any defined geographical location and time period. It creates a data.frame output and automatically plot to the console. Automatic export of the table (.csv) is optional.
-#' * The presence of lunar eclipse during the simulated period is also reported as a console message. The illuminance reduction during lunar eclipse is not modeled.
-#' * To create a moonlight or sunlight LED schedule for light re-creation using MoonShineP, user need to download the R script version of the MoonShineR: Moonlight scheduler or MoonShineR: Sunlight/twilight scheduler from GitHub repository: see <https://github.com/Crampton-Lab/MoonShine>
-#' * The R script version also have other simulation features, such as simulating the blocking of direct moonlight from horizon obstructions (e.g., tree line or ridgeline), and attenuation by random passing clouds.
-#' * To learn more about MoonShineR, see <https://lokpoon.github.io/software/>
+#' * predict_lux() predicts ground illuminance from moonlight, sunlight, and/or twilight (in lux) for a specified geographical location and time period. It returns a data frame and automatically displays a plot of the predictions. Optional export of the data frame as a CSV file is available.
+#' * The occurrence of lunar eclipses during the simulated period is reported in a console message. The reduction in illuminance during lunar eclipses is not modeled.
+#' * To generate LED control schedules for use with MoonShineP, download the stand-alone MoonShineR Moonlight scheduler or Sunlight/twilight scheduler scripts from the main MoonShine GitHub repository: <https://github.com/Crampton-Lab/MoonShine>. These scripts are not included in the CRAN package.
+#' * The stand-alone scheduler scripts also provide additional simulation features, including the obstruction of direct moonlight by trees or ridgelines and attenuation by passing clouds.
+#' * For further documentation on MoonShineR, the scheduler scripts, and MoonShineP, see <https://lokpoon.github.io/MoonShine_manual/overview.html>.
 #' @param latitude `numeric`. Latitude in decimal degrees (e.g., `-4.21528`).
 #' @param longitude `numeric`. Longitude in decimal degrees (e.g., `-69.94056`).
-#' @param site_elev `numeric`. Site elevation in meters (e.g., `0` is sea level). Default is `0`. Elevation correction only applies to moonlight but not sunlight and twilight. Site elevation of a coordinate location can be obtained from <https://www.dcode.fr/earth-elevation>.
-#' @param time_zone `character`. Time zone for the location set (e.g., `"EST"`). Remember to change time_zone to correspond it to the location set. For a list of time zone names, enter `OlsonNames(tzdir = NULL)` in R console. Use a time zone without DST to avoid confusion (e.g., use `"EST"` instead of `"America/New_York"`).
+#' @param site_elev `numeric`. Site elevation in meters above sea level (default `0`). The elevation correction applies to moonlight predictions but not to sunlight or twilight predictions. Elevation for a given location can be obtained from <https://www.dcode.fr/earth-elevation>.
+#' @param time_zone `character`. Time zone for the specified location (e.g., `"EST"` for a fixed UTC-5 offset). Set time_zone consistently with the date and time being simulated. To list recognized time zones in R, enter OlsonNames(). A fixed-offset zone avoids daylight saving time changes, whereas a location-based zone such as `"America/New_York"` applies them; choose according to the intended interpretation of local time.
 #' @param date_start `character`. Starting date of the simulation (`"YYYY-MM-DD"`).
 #' @param time_start `character`. Starting time of the simulation (`"hh:mm:ss"`). Default is `"00:00:00"`.
 #' @param duration_day `numeric`. Duration of the simulation in days.
-#' @param time_interval_minutes `numeric`.The temporal resolution of the simulation in minutes. E.g., `5` calculates the illuminance every 5 minutes. Using small time interval requires longer computation time. Default is `5`.
-#' @param darksky_value `numeric`. A baseline illuminance (in lux) added to the model to represent other constant nocturnal light sources (e.g., starlight and airglow). Default is `0.0008`. Change it to zero if a completely dark sky is preferred.
-#' @param output_directory `character`. Directory to save the output table (.csv) and plot (.pdf). Ignore output_directory if the export options are turned OFF (i.e., `export_table = FALSE`).
-#' @param export_table `logical`. `TRUE` to export output .csv table to the output_directory. `FALSE` to disable. Default is `FALSE`.
-#' @param show_progress `logical`. `TRUE` to show a progress bar. `FALSE` to disable. Default is `TRUE`.
+#' @param time_interval_minutes `numeric` Time interval between successive illuminance predictions, in minutes. For example, 5 calculates illuminance every 5 minutes. Smaller intervals require more computation time. Default is `5`.
+#' @param darksky_value `numeric`. A baseline illuminance (in lux) added to the model to represent other approximately constant nocturnal light sources (e.g., starlight and airglow). Default is `0.0008`. Set it to zero to omit this background component.
+#' @param output_directory `character`. Directory for exported output files. If export_table = `FALSE`, no CSV table is exported.
+#' @param export_table `logical`. If `TRUE`, export the output data frame as a CSV file to output_directory; if `FALSE`, do not export the table. Default is `FALSE`.
+#' @param show_progress `logical`. If `TRUE`, display a progress bar; `FALSE` disables it. Default is `TRUE`.
 #' @details
 #' # Columns found in the output data.frame/.csv table:
-#' * A series of astronomical and illuminance values are reported for every time stamp. In explanation,
-#' * **datetime** `POSIXct`. Datetime in `"YYYY-MM-DD hh:mm:ss"`.
-#' * **phase_angle** `numeric`. Phase angle of the moon in degree angle.
+#' * The output reports astronomical quantities and predicted illuminance for each time step.
+#' * **datetime** `POSIXct`. Date and time in `"YYYY-MM-DD hh:mm:ss"`.
+#' * **phase_angle** `numeric`. Lunar phase angle, in degrees.
 #' * **fraction** `numeric`. Illuminated fraction of the moon.
-#' * **Z_moon** `numeric`. Zenith distance of the moon in degree angle (i.e., the angle of separation from directly overhead). > 90 means the moon is below the horizon.
-#' * **distance** `numeric`. The moon-Earth distance in km.
-#' * **sun_altitude** `numeric`. The sun altitude (relative to the horizon) in degree angle. Negative value means the sun is below the horizon.
-#' * **"moon_final_lux"** `numeric`. Only the illuminance of moonlight (plus the darksky_value) during both day and night.
-#' * **"moon_final_lux_nighttime"** `numeric`. Only the illuminance of moonlight at night (no value during daytime, when `sun_altitude` > 0 degrees)
-#' * **"moonlight_twilight_nighttime"** `numeric`. The illuminance of moonlight plus twilight (no value during daytime, when `sun_altitude` > 0 degrees)
-#' * **"twilight"** `numeric`. Only the illuminance of twilight (defined as the light when `sun_altitude` < 0 degrees).
-#' * **"sunlight"** `numeric`. Only the illuminance of sunlight (defined as the light when `sun_altitude` > 0 degrees).
-#' * **"sunlight_twilight"** `numeric`. The sum of sunlight and twilight.
-#' * **"total_illuminance_all"** `numeric`. All illuminance together, calculated as the sum of moonlight, twilight, and sunlight.
-#' * **"eclipse"** `logical`. The presence of a lunar eclipse (all kinds), including penumbral lunar eclipse.
+#' * **Z_moon** `numeric`. Lunar zenith distance, in degrees (angular distance from directly overhead). Values greater than 90 indicate that the moon is below the horizon.
+#' * **distance** `numeric`. Earth–moon distance, in km.
+#' * **sun_altitude** `numeric`. Altitude of the sun above the horizon, in degrees. Negative values indicate that the sun is below the horizon.
+#' * **"moon_final_lux"** `numeric`. Predicted moonlight illuminance plus darksky_value, for both daytime and nighttime.
+#' * **"moon_final_lux_nighttime"** `numeric`. Predicted moonlight illuminance at night; no value is reported during daytime (`sun_altitude` > 0).
+#' * **"moonlight_twilight_nighttime"** `numeric`. Sum of moonlight and twilight illuminance at night; no value is reported during daytime (`sun_altitude` > 0).
+#' * **"twilight"** `numeric`. Twilight illuminance (`sun_altitude` < 0).
+#' * **"sunlight"** `numeric`. Sunlight illuminance (`sun_altitude`` > 0).
+#' * **"sunlight_twilight"** `numeric`. Sum of sunlight and twilight illuminance.
+#' * **"total_illuminance_all"** `numeric`. Sum of moonlight, twilight, and sunlight illuminance.
+#' * **"eclipse"** `logical`. Indicator for a lunar eclipse, including penumbral eclipses.
 #' # Attribution
-#' * Astronomical values used in calculating ground illuminance are provided by the R package suncalc (Thieurmel & Elmarhraoui, 2022).
+#' * Astronomical quantities used in calculating ground illuminance are provided by the R package suncalc (Thieurmel & Elmarhraoui, 2022).
 #' * Atmospheric pressure at elevation is provided by the R package RPMODEL (Stocker et al., 2020).
 #' @keywords moonlight
 #' @import magrittr
 #' @export
 #' @references
-#' * Allen, C. W. (1976). Astrophysical quantities. Athelone Press.
-#' * Austin, R. H., Phillips, B. F., & Webb, D. J. (1976). A method for calculating moonlight illuminance at the earth's surface. The Journal of Applied Ecology, 13(3), 741.
-#' * Buratti, B. J., Hillier, J. K., & Wang, M. (1996). The lunar opposition surge: Observations by clementine. Icarus, 124(2), 490-499.
+#' * Allen, C. W. (1976). Astrophysical quantities (3rd ed.). Athlone Press.
+#' * Austin, R. H., Phillips, B. F., & Webb, D. J. (1976). A method for calculating moonlight illuminance at the Earth's surface. The Journal of Applied Ecology, 13(3), 741–748.
+#' * Buratti, B. J., Hillier, J. K., & Wang, M. (1996). The lunar opposition surge: Observations by Clementine. Icarus, 124(2), 490-499.
 #' * Hanel, A., Posch, T., Ribas, S. J., Aube, M., Duriscoe, D., Jechow, A., Kollath, Z., Lolkema, D. E., Moore, C., Schmidt, N., Spoelstra, H., Wuchterl, G., & Kyba, C. C. M. (2018). Measuring night sky brightness: Methods and challenges. Journal of Quantitative Spectroscopy and Radiative Transfer, 205, 278-290.
-#' * Krisciunas, K., & Schaefer, B. E. (1991). A model of the brightness of moonlight. Publications of the Astronomical Society of the Pacific, 103, 1033.
+#' * Krisciunas, K., & Schaefer, B. E. (1991). A model of the brightness of moonlight. Publications of the Astronomical Society of the Pacific, 103, 1033-1039.
 #' * Laue, E. G. (1970). The measurement of solar spectral irradiance at different terrestrial elevations. Solar Energy, 13(1), 43-57.
+#' * Poon, L., Jenks, I. T., & Crampton, W. G. R. (2024). MoonShine: A software-hardware system for simulating moonlight ground illuminance and re-creating artificial moonlight cycles in a laboratory environment. Methods in Ecology and Evolution, 15, 701–715. \doi{10.1111/2041-210X.14299}
 #' * Schaefer, B. E. (1990). Telescopic limiting magnitudes. Publications of the Astronomical Society of the Pacific, 102, 212.
 #' * Seidelmann, P. K., United States Naval Observatory, & Great Britain (Eds.). (1992). Explanatory supplement to the Astronomical almanac (Rev. ed.). University Science Books.
 #' * Stocker, B. D., Wang, H., Smith, N. G., Harrison, S. P., Keenan, T. F., Sandoval, D., Davis, T., & Prentice, I. C. (2020). P-model v1.0: An optimality-based light use efficiency model for simulating ecosystem gross primary production. Geoscientific Model Development, 13(3), 1545-1581.
@@ -55,14 +56,14 @@
 #'   Other columns include various astronomical values.
 #' @examples
 #' # Predict the nighttime moonlight illuminance in Leticia, Colombia,
-#' # for 14 days starting on 2023-02-27 at 6pm.
+#' # for 10.5 days starting on 2023-02-27 at 6 pm (UTC -5).
 #'
 #' moonlight_output <- predict_lux(latitude = -4.21528, longitude = -69.94056, site_elev = 0,
 #'                     time_zone = "EST", date_start = "2023-02-27", time_start = "18:00:00",
-#'                     duration_day = 2, time_interval_minutes = 15, darksky_value = 0.0008,
+#'                     duration_day = 10.5, time_interval_minutes = 5, darksky_value = 0.0008,
 #'                     output_directory = NULL, export_table = FALSE, show_progress = TRUE)
 #'
-#' moonlight_output #return completed data frame
+#' moonlight_output # Display the completed data frame.
 
 
 

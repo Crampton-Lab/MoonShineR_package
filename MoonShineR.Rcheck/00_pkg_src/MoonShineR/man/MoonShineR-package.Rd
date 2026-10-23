@@ -11,5 +11,11 @@ Predict and plot light levels (ground illuminance) from moonlight, sunlight, and
 \author{
 \strong{Maintainer}: Lok Poon \email{poonchiulok@gmail.com} (\href{https://orcid.org/0000-0003-3547-1614}{ORCID})
 
+Authors:
+\itemize{
+  \item Ian T. Jenks
+  \item William G. R. Crampton (\href{https://orcid.org/0000-0003-2892-8065}{ORCID})
+}
+
 }
 \keyword{internal}
