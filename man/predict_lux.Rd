@@ -70,7 +70,7 @@ Other columns include various astronomical values.
 \item \strong{"moon_final_lux_nighttime"} \code{numeric}. Predicted moonlight illuminance at night; no value is reported during daytime (\code{sun_altitude} > 0).
 \item \strong{"moonlight_twilight_nighttime"} \code{numeric}. Sum of moonlight and twilight illuminance at night; no value is reported during daytime (\code{sun_altitude} > 0).
 \item \strong{"twilight"} \code{numeric}. Twilight illuminance (\code{sun_altitude} < 0).
-\item \strong{"sunlight"} \code{numeric}. Sunlight illuminance (`sun_altitude`` > 0).
+\item \strong{"sunlight"} \code{numeric}. Sunlight illuminance (\code{sun_altitude} > 0).
 \item \strong{"sunlight_twilight"} \code{numeric}. Sum of sunlight and twilight illuminance.
 \item \strong{"total_illuminance_all"} \code{numeric}. Sum of moonlight, twilight, and sunlight illuminance.
 \item \strong{"eclipse"} \code{logical}. Indicator for a lunar eclipse, including penumbral eclipses.
