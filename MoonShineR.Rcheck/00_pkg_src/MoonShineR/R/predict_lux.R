@@ -30,7 +30,7 @@
 #' * **"moon_final_lux_nighttime"** `numeric`. Predicted moonlight illuminance at night; no value is reported during daytime (`sun_altitude` > 0).
 #' * **"moonlight_twilight_nighttime"** `numeric`. Sum of moonlight and twilight illuminance at night; no value is reported during daytime (`sun_altitude` > 0).
 #' * **"twilight"** `numeric`. Twilight illuminance (`sun_altitude` < 0).
-#' * **"sunlight"** `numeric`. Sunlight illuminance (`sun_altitude`` > 0).
+#' * **"sunlight"** `numeric`. Sunlight illuminance (`sun_altitude` > 0).
 #' * **"sunlight_twilight"** `numeric`. Sum of sunlight and twilight illuminance.
 #' * **"total_illuminance_all"** `numeric`. Sum of moonlight, twilight, and sunlight illuminance.
 #' * **"eclipse"** `logical`. Indicator for a lunar eclipse, including penumbral eclipses.

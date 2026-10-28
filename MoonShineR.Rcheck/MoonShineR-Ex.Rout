@@ -12202,7 +12202,7 @@ Calculation completed. No lunar eclipse in the simulation period.
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  10.445 0.208 10.656 0 0 
+Time elapsed:  9.877 0.302 10.197 0 0 
 > grDevices::dev.off()
 null device 
           1 

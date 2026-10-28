@@ -52,17 +52,16 @@ unable to verify current time
 * checking Rd \usage sections ... OK
 * checking Rd contents ... OK
 * checking for unstated dependencies in examples ... OK
-* checking examples ... [11s/11s] NOTE
+* checking examples ... [10s/10s] NOTE
 Examples with CPU (user + system) or elapsed time > 5s
-             user system elapsed
-plot_lux    5.225  0.093   5.319
-predict_lux 5.094  0.110   5.204
+          user system elapsed
+plot_lux 5.018  0.166   5.194
 * checking PDF version of manual ... OK
 * checking HTML version of manual ... NOTE
 Found the following HTML validation problems:
 MoonShineR-package.html:15:44 (MoonShineR-package.Rd:7): Error: <main> is not recognized!
 MoonShineR-package.html:15:44 (MoonShineR-package.Rd:7): Warning: discarding unexpected <main>
-MoonShineR-package.html:43:1 (MoonShineR-package.Rd:19): Warning: discarding unexpected </main>
+MoonShineR-package.html:58:1 (MoonShineR-package.Rd:17): Warning: discarding unexpected </main>
 MoonShineR-package.html:4:1 (MoonShineR-package.Rd:7): Warning: <link> inserting "type" attribute
 MoonShineR-package.html:12:1 (MoonShineR-package.Rd:7): Warning: <script> proprietary attribute "onload"
 MoonShineR-package.html:12:1 (MoonShineR-package.Rd:7): Warning: <script> inserting "type" attribute
@@ -96,7 +95,9 @@ predict_lux.html:12:1 (predict_lux.Rd:5): Warning: <script> proprietary attribut
 predict_lux.html:12:1 (predict_lux.Rd:5): Warning: <script> inserting "type" attribute
 predict_lux.html:17:1 (predict_lux.Rd:5): Warning: <table> lacks "summary" attribute
 predict_lux.html:64:1 (predict_lux.Rd:23): Warning: <table> lacks "summary" attribute
-* checking for non-standard things in the check directory ... OK
+* checking for non-standard things in the check directory ... NOTE
+Found the following files/directories:
+  ‘.DS_Store’
 * checking for detritus in the temp directory ... OK
 * DONE
-Status: 3 NOTEs
+Status: 4 NOTEs
