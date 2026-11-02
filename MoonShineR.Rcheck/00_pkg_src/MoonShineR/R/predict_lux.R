@@ -56,11 +56,11 @@
 #'   Other columns include various astronomical values.
 #' @examples
 #' # Predict the nighttime moonlight illuminance in Leticia, Colombia,
-#' # for 10.5 days starting on 2023-02-27 at 6 pm (UTC -5).
+#' # for 5.5 days starting on 2023-03-03 at 6 pm (UTC -5).
 #'
 #' moonlight_output <- predict_lux(latitude = -4.21528, longitude = -69.94056, site_elev = 0,
-#'                     time_zone = "EST", date_start = "2023-02-27", time_start = "18:00:00",
-#'                     duration_day = 10.5, time_interval_minutes = 5, darksky_value = 0.0008,
+#'                     time_zone = "EST", date_start = "2023-03-03", time_start = "18:00:00",
+#'                     duration_day = 5.5, time_interval_minutes = 20, darksky_value = 0.0008,
 #'                     output_directory = NULL, export_table = FALSE, show_progress = TRUE)
 #'
 #' moonlight_output # Display the completed data frame.
